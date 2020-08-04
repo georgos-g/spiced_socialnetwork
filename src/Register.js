@@ -13,7 +13,6 @@ export default class Register extends React.Component{
             password: '',
             firstname: '',
             lastname: '',
-
         };
     }
     

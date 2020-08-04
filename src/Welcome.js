@@ -12,7 +12,7 @@ import PasswordReset from './PasswordReset.js';
 export default function Welcome() {
     return (
         <div className="welcome">
-            <h1>Welcome Feta Friends</h1>
+            <h1>Welcome Secret Friends </h1>
 
             <HashRouter>
                 <Route path="/login" component={Login} />

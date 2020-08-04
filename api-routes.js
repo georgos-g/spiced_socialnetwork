@@ -6,7 +6,7 @@ const ses = require('./ses.js');
 
 const passwords = require('./passwords.js');
 const cryptoRandomString = require("crypto-random-string");
-const { request, response } = require('express');
+
 
 
 
@@ -20,12 +20,12 @@ router.post('api/v1/register', (request, response) => {
             db.addNewUser(firstname, lastname, email, password_hash)
         
         )
-        .then((newUser) => {
-            request.session.userId = newUser.id;
+        .then((addNewUser) => {
+            request.session.userId = addNewUser.id;
 
             response.json({
                 success: true,
-                user: newUser,
+                user: addNewUser,
 
             });
         })
@@ -40,7 +40,7 @@ router.post('api/v1/register', (request, response) => {
 });
 
 
-//Reset PW
+//Route for reset PW
 router.post('api/v1/password-reset/code', (request, response) => {
     const { email } = request.body;
     const secretCode = cryptoRandomString({ length: 6 });
@@ -56,29 +56,38 @@ router.post('api/v1/password-reset/code', (request, response) => {
     });
 });
 
-//Set PW
+//Route for set new PW
 router.post('api/v1/password-reset/set-password', (request, response) => {
     
     //get email, code, new password from request body------------------
+    const { email, code, password } = request.body;
+    db.get
 
     //check if email belongs to any user-------------------------------
         
     
-    db.getEmailCode(email).then((result) => {
+    db.getEmailCode(code).then((result) => {
+        
+        
+        
         if (result) {
 
             //check if code from db is the same as code from request----
 
             //hash the password-----------------------------------------
 
-            db.updatePassword
+            db.updatePassword(password_hash);
             
         } else {
-            response.json({success: false, error:'Code invalid'})
+            response.json({ success: false, error: 'Code invalid' });
         }
       
     });
 
 });
+
+// router.get('api/vi/me'(request, response) => {
+//     const userId
+// })
 
 module.exports = router;

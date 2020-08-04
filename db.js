@@ -37,11 +37,22 @@ exports.getEmailCode = (email) => {
 
 
 
-// exports.getUserByEmail = (email) => {
-//     return db.query
-//     ('SELECT * FROM users WHERE email = $1;', 
-//         [email]
-//     ).then(response => response.rows[0]);
-// };
+exports.getUserByEmail = (email) => {
+    return db.query
+    ('SELECT * FROM users WHERE email = $1;', 
+        [email]
+    ).then(response => response.rows[0]);
+};
+
+
+
+
+exports.getUser = (userId) => {
+    return db.query
+    ('SELECT * FROM users WHERE email = $1;', 
+        [userId]
+    ).then(response => response.rows[0]);
+};
+
 
 

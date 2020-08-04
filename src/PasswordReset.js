@@ -4,53 +4,121 @@ import {Link} from 'react-router-dom';
 
 import axios from './axios.js';
 
-export default class PasswordReset extends React.Component {
-    constructor() {
+export default class PasswordReset extends React.Component { 
+
+    constructor() {//
         super();
         this.state = {
             step: 1,
-
-            email: 'canary.ceiling@spicedling.email',
+            email: '',
+            newPassword: '',
+            secretCode: '',
         };
     }
 
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+        
+    }
 
-
-    submitNewCodeGeneration() {
+    resetEmailCode() {
         axios.post('api/v1/password-reset/code', {
-            email: this.state.email
+            email: this.state.email,
+            newPassword: this.state.newPassword,
+            secretCode: this.state.secretCode,
+            
         }).then((response) => {
-            this.setState({ step: 2 });
+            if (response.data.success) {
+                this.setState({ step: 2 });
+            } 
         });
     }
 
-    render() {
-        return (
-            <div className='reset_password' > 
-                <h2>Reset the Password</h2>
+    setNewPassword() {
+        axios.post('api/v1/password-reset/pw-update', {
+            newPassword: this.state.newPassword,
+            secretCode: this.state.secretCode,
             
-                {this.state.step == 1 && ( 
-                    <h3>
-                        First step: Email field 
-                        <button onClick={(event) => this.submitNewCodeGeneration()}>
-                            Next step:                             
-                        </button>
-
-                    </h3>    
-                )}
-                {this.state.step == 2 && (
-                    <h3>
-                        Second step: New code and password fields
-                        <button onClick={(event) => this.setState({ step: 3 })}>
-                            Next step:
-                        </button> 
-                    </h3>
-
-                )}
-                {this.state.step == 3 && <h3>Third step: Success</h3>}
-                <Link to='/login'>Go to login</Link>
-
-            </div>
-        );
+        }).then((response) => {
+            if (response.data.success) {
+                this.setState({ step: 3 });
+            } 
+        });
+        
     }
+
+    render() { 
+
+
+
+        if (this.state.step === 1) {
+
+            return (
+                <div className='reset_password'> 
+                    <h3>Reset your code - Enter your email.</h3>
+                    <input
+                        key="email"
+                        id='email'
+                        name='email'
+                        placeholder='YOUR EMAIL'
+                        onChange={(event) => this.handleChange(event)}
+                    />
+                             
+                             
+                    <button onClick={(event) => this.resetEmailCode(event)}>
+                            Reset Password
+                    </button> 
+                </div>
+    
+            );
+        }//state.step === 1
+        
+            
+        if (this.state.step == 2) {
+            return ( 
+                <div className='reset_password'>
+                    Enter the code you have recieved and change your password.
+                    <br />
+                    <input
+                        key="secretCode"
+                        id='secret-code'
+                        name='secretCode'
+                        placeholder='CODE'
+                        onChange={(event) => this.handleChange(event)}
+                    />
+                    <br /> 
+                    <input
+                        key="newPassword"
+                        id='new-password'
+                        name='newPassword'
+                        placeholder='NEW PASSWORD'
+                        onChange={(event) => this.handleChange(event)}
+                    />
+                    <br />     
+                    <button onClick={(event) => this.resetEmailCode(event)}>
+                            Reset Password
+                    </button> 
+                </div>            
+            );
+        }
+    
+
+        
+        if (this.state.step == 3) {
+            return (
+                <div className='reset_password'>Operation Successful! 
+                    <Link to='/login'>Go to login</Link></div>);  
+                   
+        } 
+       
+                
+            
+        
+    
+    }//Render
+
+
 }
+   
