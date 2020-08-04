@@ -24,7 +24,7 @@ export default class PasswordReset extends React.Component {
     }
 
     resetEmailCode() {
-        axios.post('api/v1/password-reset/code', {
+        axios.post('/api/v1/password-reset/code', {
             email: this.state.email,
             newPassword: this.state.newPassword,
             secretCode: this.state.secretCode,
@@ -37,10 +37,10 @@ export default class PasswordReset extends React.Component {
     }
 
     setNewPassword() {
-        axios.post('api/v1/password-reset/pw-update', {
-            newPassword: this.state.newPassword,
-            secretCode: this.state.secretCode,
-            
+        axios.post('/api/v1/password-reset/set-password', {
+            password: this.state.password,
+            code: this.state.code,
+            email: this.state.email,
         }).then((response) => {
             if (response.data.success) {
                 this.setState({ step: 3 });
@@ -84,7 +84,7 @@ export default class PasswordReset extends React.Component {
                     <input
                         key="secretCode"
                         id='secret-code'
-                        name='secretCode'
+                        name='code'
                         placeholder='CODE'
                         onChange={(event) => this.handleChange(event)}
                     />
@@ -92,12 +92,12 @@ export default class PasswordReset extends React.Component {
                     <input
                         key="newPassword"
                         id='new-password'
-                        name='newPassword'
+                        name='password'
                         placeholder='NEW PASSWORD'
                         onChange={(event) => this.handleChange(event)}
                     />
                     <br />     
-                    <button onClick={(event) => this.resetEmailCode(event)}>
+                    <button onClick={(event) => this.setNewPassword(event)}>
                             Reset Password
                     </button> 
                 </div>            

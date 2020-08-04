@@ -11,7 +11,7 @@ const cryptoRandomString = require("crypto-random-string");
 
 
 
-router.post('api/v1/register', (request, response) => {
+router.post('/api/v1/register', (request, response) => {
     const { firstname, lastname, email, password } = request.body;
     
     passwords
@@ -21,7 +21,7 @@ router.post('api/v1/register', (request, response) => {
         
         )
         .then((addNewUser) => {
-            request.session.userId = addNewUser.id;
+            request.session.userID = addNewUser.id;
 
             response.json({
                 success: true,
@@ -40,43 +40,109 @@ router.post('api/v1/register', (request, response) => {
 });
 
 
+///Route for login
+
+router.post('/api/v1/login', (request, response) => {
+    //check if fields are filled 
+    const { email, password } = request.body;
+    console.log ("request.body", request.body);  
+    if (!email || !password) {
+        return response.redirect('register', {
+            error: 'Required field/s are missing',
+            email,
+            password,
+
+        });
+    }
+    //compare pasword_hash with DB
+    db.getUserByEmail(email)
+        .then((result) => {
+            console.log ("result", result);  
+            const userPasswordHashFromDB = result.password_hash;
+            //hashing
+            passwords.compare(password, userPasswordHashFromDB).then((isCorrect) => {
+                console.log ("isCorrect", isCorrect);  
+                if (isCorrect) {
+                    request.session.userID = result.id;
+                    response.json({ success: true });
+                }
+    
+                // else {
+                //     response.status(401).send('Your email or passwort are incorrect.');
+    
+                // }
+            });
+        }).catch(error => {
+            console.log(error);
+        
+            response.json({
+                success: false,
+                error: 'Your email or passwort are incorrect.'
+
+            });
+        });
+});
+    
+
+
 //Route for reset PW
-router.post('api/v1/password-reset/code', (request, response) => {
+router.post('/api/v1/password-reset/code', (request, response) => {
     const { email } = request.body;
     const secretCode = cryptoRandomString({ length: 6 });
 
     db.addPasswordReset(email, secretCode).then((result) => {
+        
+        if (result) {
         //send email with new PW 
-        const emailBody = `Use this code <span>${secretCode}</span> to change your password.`;
-        ses.send(email, 'Password reset code', emailBody).then(() => {
+            const emailBody = `Use this code <span>${secretCode}</span> to change your password.`;
+            ses.send(email, 'Password reset code', emailBody).then(() => {
            
             //send message 
-            response.json({ success: true });
-        });
+                response.json({ success: true });
+            });
+        } else {
+            response.json({ success: false, error: 'Something did not worked out!' });
+
+        }
     });
+   
 });
 
-//Route for set new PW
-router.post('api/v1/password-reset/set-password', (request, response) => {
+
+
+
+
+
+
+//Route for set new Password
+router.post('/api/v1/password-reset/set-password', (request, response) => {
     
     //get email, code, new password from request body------------------
     const { email, code, password } = request.body;
-    db.get
-
-    //check if email belongs to any user-------------------------------
-        
     
-    db.getEmailCode(code).then((result) => {
+    //check if email belongs to any user-------------------------------        
+    db.getCodeByEmail(code, email).then((result) => {
+        console.log("code", code);
+        console.log ("email", email);  
         
+
+        console.log ("result", result);  
         
-        
+    //check if code from db is the same as code from request----            
         if (result) {
-
-            //check if code from db is the same as code from request----
-
+          
             //hash the password-----------------------------------------
-
-            db.updatePassword(password_hash);
+            db.getUserByEmail(email).then(user => {
+                console.log ("use", user);  
+                const userId = user.id;   
+                passwords.hash(password).then((password_hash) => {
+                    console.log ("password_hash", password_hash);  
+                    db.updatePassword(userId, password_hash).then((result) => {
+                        console.log ("result 2", result);  
+                        response.json({ success: true });
+                    });
+                });
+            });    
             
         } else {
             response.json({ success: false, error: 'Code invalid' });

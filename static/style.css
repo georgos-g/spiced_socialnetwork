@@ -1,3 +1,16 @@
+body {
+    background: dimgray;
+    color: white;
+    padding: 0;
+    margin: 0;
+    
+    font-size: 16px;
+    font-family:   'Montserrat', sans-serif;
+    font-weight: 300;
+    text-align: center ;
+    height: 100%;
+}
+
 
 .login{
 

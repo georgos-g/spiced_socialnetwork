@@ -7,18 +7,22 @@ exports.addNewUser = (firstname, lastname, email, password_hash) => {
     return db.query(
         'INSERT INTO users (firstname, lastname, email, password_hash) VALUES($1, $2, $3, $4) RETURNING *;',
         [firstname, lastname, email, password_hash]
-    ).then(response => response.rows[0]);
-
+    ).then(response => response.rows[0]);        
 };
-
-
-
+    
 
 exports.addPasswordReset = (email, code) => {
     return db.query(
         'INSERT INTO passwordresets (email, code) VALUES($1, $2) RETURNING *;',
         [email, code]
-    ).then(response => response.rows[0]);
+    ).then(response => response.rows[0]);            
+};
+        
+        
+exports.updatePassword = (userID, passwordHash) => {
+    return db.query(
+        `UPDATE users SET password_hash=$1 WHERE id=$2 RETURNING *;`,
+        [passwordHash, userID]);
 
 };
 
@@ -31,7 +35,6 @@ exports.getEmailCode = (email) => {
             ORDER BY created_at DESC LIMIT 1;`,
         [email])
         .then(result => result.rows[0]);
-
 };
 
 
@@ -49,10 +52,23 @@ exports.getUserByEmail = (email) => {
 
 exports.getUser = (userId) => {
     return db.query
-    ('SELECT * FROM users WHERE email = $1;', 
+    ('SELECT * FROM users WHERE id = $1;', 
         [userId]
     ).then(response => response.rows[0]);
 };
 
 
 
+exports.getCodeByEmail = (code, email) => {
+    return db.query
+    ('SELECT * FROM passwordresets WHERE email = $1 and code = $2;', 
+        [email, code]
+    ).then(response => response.rows[0]);
+};  
+
+exports.getUserForLogin = (email, ) => {
+    return db.query
+    ('SELECT * FROM users WHERE email = $1;', 
+        [email]
+    ).then(response => response.rows[0]);
+};
