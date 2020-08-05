@@ -86,13 +86,7 @@ export function App() {
         <div className="uploader">
             <h1>Welcome Secret Friends </h1>
 
-            {/* React Routing-Bibliothek  */}
-            <HashRouter> 
-                <Route path="/login" component={Login} />
-                <Route path="/" exact component={Register} />
-                <Route path="/password-reset" component={PasswordReset} />
-            </HashRouter>
-
+            
         </div>
     );
 }
