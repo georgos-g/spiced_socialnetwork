@@ -14,7 +14,8 @@ export default function Welcome() {
         <div className="welcome">
             <h1>Welcome Secret Friends </h1>
 
-            <HashRouter>
+            {/* React Routing-Bibliothek  */}
+            <HashRouter> 
                 <Route path="/login" component={Login} />
                 <Route path="/" exact component={Register} />
                 <Route path="/password-reset" component={PasswordReset} />

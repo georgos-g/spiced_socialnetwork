@@ -1,34 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Markazi+Text|Roboto:400,400i,700,700i');
+
 body {
     background: dimgray;
     color: white;
     padding: 0;
     margin: 0;
-    
-    font-size: 16px;
+    font-size: 14px;
     font-family:   'Montserrat', sans-serif;
     font-weight: 300;
     text-align: center ;
     height: 100%;
 }
 
+.center{
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
 
+}
 .login{
+    background: lightskyblue;
 
 }
 
 .reset_password{
 
+    background: rgb(78, 96, 107)
+
+
+
 }
 
 .register{
+    background: rgb(163, 146, 175)
 
 }
 
 
 .error{
-
+    background: rgb(230, 128, 191)
 }
 
 .welcome{
+
+    background: rgb(207, 189, 145)
     
+}
+.user{
+    background:  thistle ;
+}
+#profile_pic{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    right: 15px;
+    top: 10px;
+    object-fit: contain;
+
+
+    background:  rgb(172, 155, 172) ;
+}
+
+#profile_pic img{
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.pic_placeholder{
+    background:  rgb(142, 160, 143) ;
+}
+
+#uploader{
+    margin: 0;
+      position: relative;
+      border-radius: 5px;
+    
+    width: 500px;
+    height: 60px;
+        background:  rgb(127, 153, 195) ;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.uploader_content{
+    background:  rgb(204, 151, 108) ;
+}
+.close_button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background:  rgb(243, 79, 79) ;
 }

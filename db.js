@@ -17,7 +17,28 @@ exports.addPasswordReset = (email, code) => {
         [email, code]
     ).then(response => response.rows[0]);            
 };
-        
+
+//Images----------------------  
+
+exports.addImage = (profile_picture_url, id) => {
+    return db.query(
+        `UPDATE users SET profile_picture_url=$1 WHERE id=$2 RETURNING *;`,
+        [profile_picture_url, id]
+    ).then(response => response.rows[0]);   
+};
+
+
+// exports.getImage = (id, profile_picture_url) => {
+//     return db.query(
+//         `SELECT * FROM users WHERE id=$1, profile_picture_url = $2;`,
+//         [id, profile_picture_url]
+//     ).then((result) => {return result.rows [0];
+//     });
+// };
+
+
+//----------------------
+
         
 exports.updatePassword = (userID, passwordHash) => {
     return db.query(
@@ -72,3 +93,4 @@ exports.getUserForLogin = (email, ) => {
         [email]
     ).then(response => response.rows[0]);
 };
+

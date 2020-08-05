@@ -13,7 +13,7 @@ const apiRoutes = require('./api-routes.js');
 
 
 const app = express();
-app.use('./static', express.static('./static'));
+app.use('/static', express.static('static'));
 
 app.use(express.json());  
 
@@ -26,7 +26,7 @@ app.use (cookieSession({
 
 app.use(compression());
 app.use('/public', express.static('public'));
-
+app.use('/uploads', express.static('uploads'));//uploads is the static folder
 
 
 app.use(csurf());

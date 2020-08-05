@@ -40,7 +40,7 @@ export default class Register extends React.Component {
 
     render() {
         return (
-            <div className='login'>
+            <div className='center login'>
                 <h2>Log in </h2>
 
                 {this.state.error && (

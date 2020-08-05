@@ -31,7 +31,7 @@ exports.send = (to, subject, body) => {
                 },
             },
         }).promise().then(
-            () => console.log('it worked!')
+            () => console.log('Mail sending worked!')
         ).catch(
             err => console.log(err)
         );

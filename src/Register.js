@@ -80,7 +80,8 @@ export default class Register extends React.Component{
 
                 <button onClick={(e) => this.submit()}>REGISTER</button>
                    
-                You are allready registert? Go to <Link to= '/login'>the login</Link>.
+               <p> You are allready registert?</p>
+               <p>Go to the <Link to='/login'>login.</Link></p>
                 
             </div>
         );
