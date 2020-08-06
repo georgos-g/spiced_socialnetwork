@@ -18,7 +18,7 @@ const s3 = require('./s3.js');
 router.post('/api/v1/register', (request, response) => {
     const { firstname, lastname, email, password } = request.body;
     
-    passwords
+    passwords//passwords.js
         .hash(password)
         .then((password_hash) =>
             db.addNewUser(firstname, lastname, email, password_hash)
@@ -64,6 +64,7 @@ router.post('/api/v1/login', (request, response) => {
             
             const userPasswordHashFromDB = result.password_hash;
             //hashing
+            //If password and BD hash are equal  
             passwords.compare(password, userPasswordHashFromDB).then((isCorrect) => {
                 
                 if (isCorrect) {
@@ -118,7 +119,7 @@ router.post('/api/v1/password-reset/code', (request, response) => {
 //Route for set new password
 router.post('/api/v1/password-reset/set-password', (request, response) => {
     
-    //get email, code, new password from request body
+    //get variables for email, code, new password from DB
     const { email, code, password } = request.body;
     
     //check if email belongs to any user  
@@ -148,16 +149,20 @@ router.post('/api/v1/password-reset/set-password', (request, response) => {
     });
 
 });
-//User Details
-router.get('/api/vi/me', (request, response) => {
-    const userId = request.session.userId;
+//Server User Details
+router.get('/api/v1/me', (request, response) => {
+    const userId = request.session.userID;
+    console.log ("request.session", request.session);  
 
     if (!userId) {
         return response.json({});
 
     } else {
         db.getUser(userId)
+            
             .then(user => {
+
+                console.log ("user", user);  
                 delete user.password_hash;
                 response.json(user);
 
@@ -189,7 +194,7 @@ const uploader = multer({
 });
 
 //upload files to AWS S3---------------------------------------------------- 
-router.post('/api/v1/user/profile-upload', uploader.single('file'), (request, response) => {
+router.post('/upload', uploader.single('file'), (request, response) => {
     const s3ImageURL = s3.generateBucketURL(request.file.filename);
     s3.uploadFile(request.file)
         

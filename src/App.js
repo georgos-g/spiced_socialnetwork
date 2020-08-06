@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from './axios.js';
-import ProfilePic  from './ProfilePic.js';
+import ProfilePic from './ProfilePic.js';
+import Profile from './Profile.js';
 import Uploader from './Uploader.js';
 
 
@@ -18,33 +19,22 @@ export default class App extends React.Component {
         };
     }
     componentDidMount() {//wenn alles geladen ist ausführen
-        axios.get('api/v1/me').then(response => {
+        axios.get('/api/v1/me').then(response => {
             this.setState({ user: response.data });
         });
-        console.log('I am here GG');
+        console.log('I am here...Me ');
     }
     render() {
         const { user, uploaderVisible } = this.state;
         if (!user) {
-            //uploader dummy div ------------------------------------------------------------
-            return <div className='user'>Loading......
-                <ProfilePic
-                    // firstname={user.firstname}
-                    // lastname={user.lastname}
-                    // profile_pic_url={user.profile_pic_url}
-                    clickHandler={(e) => 
-                        this.setState({uploaderVisible: false})
-                    }
-                />
-                
-
-            </div>; 
+            //uploader dummy div 
+            return <div>I am Loading...</div>;
         }
 
         else {
 
             return (
-                <div className='user'>You are In
+                <div className='user'>You are In 
                     <ProfilePic
                         firstname={user.firstname}
                         lastname={user.lastname}
@@ -53,6 +43,7 @@ export default class App extends React.Component {
                             this.setState({uploaderVisible: true})
                         }
                     />
+                 
 
                     {uploaderVisible && (
                         <Uploader
@@ -63,15 +54,37 @@ export default class App extends React.Component {
                                 this.setState({
                                     uploaderVisible: false, user: {
                                         ...user,
-                                        profile_pic_url:newPic
+                                        profile_pic_url: newPic
                                     }
                                 });
 
                             }}
                         />
+
+                        
                     )                 
                     }
+
                  Hi {user.firstname} :-)
+                    
+                    <Profile
+                        firstname={user.firstname}
+                        lastname={user.lastname}
+                        profilePic={//---------
+                            <ProfilePic
+                                firstname={user.firstname}
+                                lastname={user.lastname}
+                                profile_ ic_url={user.profile_pic_url}
+                                clickHandler={(e) => 
+                                    this.setState({uploaderVisible: true})
+                                }
+                            />
+
+                        }
+                        
+                    />
+                    
+                    
                 </div>
 
 
@@ -81,12 +94,3 @@ export default class App extends React.Component {
 }
 
 
-export function App() {
-    return (
-        <div className="uploader">
-            <h1>Welcome Secret Friends </h1>
-
-            
-        </div>
-    );
-}

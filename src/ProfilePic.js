@@ -7,7 +7,7 @@ export default class ProfilePic extends React.Component {
     }
 
     render() {
-        //props für App.js
+        //props for App.js for ProfilePic 
         const { firstname, lastname, profile_pic_url, clickHandler } = this.props;
         const fullName = `${firstname} ${lastname}`;
         console.log("fullName", fullName);  

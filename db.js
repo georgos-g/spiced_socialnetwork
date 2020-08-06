@@ -28,13 +28,13 @@ exports.addImage = (profile_picture_url, id) => {
 };
 
 
-// exports.getImage = (id, profile_picture_url) => {
-//     return db.query(
-//         `SELECT * FROM users WHERE id=$1, profile_picture_url = $2;`,
-//         [id, profile_picture_url]
-//     ).then((result) => {return result.rows [0];
-//     });
-// };
+exports.getImage = (id, profile_picture_url) => {
+    return db.query(
+        `SELECT * FROM users WHERE id=$1, profile_picture_url = $2;`,
+        [id, profile_picture_url]
+    ).then((result) => {return result.rows [0];
+    });
+};
 
 
 //----------------------
