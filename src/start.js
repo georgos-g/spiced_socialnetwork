@@ -1,18 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import Welcome from './Welcome.js';
-import App from './App.js';
+import Welcome from "./Welcome.js";
+import App from "./App.js";
 
-
-const userIsLogedIn = location.pathname == '/';
+const userIsLogedIn = location.pathname == "/";
 
 let primaryComponent = <Welcome />;
 if (userIsLogedIn) {
     primaryComponent = <App />;
-    
 }
 
-ReactDOM.render(
-    primaryComponent, document.getElementById('root')
-);
+ReactDOM.render(primaryComponent, document.getElementById("root"));

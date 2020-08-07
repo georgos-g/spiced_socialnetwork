@@ -53,7 +53,7 @@ body {
     background:  thistle ;
 }
 #profile_pic{
-   
+   position: absolute;
     height: 100px;
     width: 100px;
     border-radius: 5px;
@@ -100,5 +100,11 @@ body {
 }
 
 .profile{
+    background:  rgb(90, 84, 92) ;
     
+}
+
+.bio_editor{
+    background:  rgb(241, 207, 255) ;
+
 }

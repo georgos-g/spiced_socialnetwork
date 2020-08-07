@@ -21,6 +21,7 @@ exports.addPasswordReset = (email, code) => {
 //Images----------------------  
 
 exports.addImage = (profile_picture_url, id) => {
+    console.log ("profile_picture_url, id", profile_picture_url, id);  
     return db.query(
         `UPDATE users SET profile_picture_url=$1 WHERE id=$2 RETURNING *;`,
         [profile_picture_url, id]
@@ -40,10 +41,10 @@ exports.getImage = (id, profile_picture_url) => {
 //----------------------
 
         
-exports.updatePassword = (userID, passwordHash) => {
+exports.updatePassword = (userId, passwordHash) => {
     return db.query(
         `UPDATE users SET password_hash=$1 WHERE id=$2 RETURNING *;`,
-        [passwordHash, userID]);
+        [passwordHash, userId]);
 
 };
 
@@ -87,10 +88,19 @@ exports.getCodeByEmail = (code, email) => {
     ).then(response => response.rows[0]);
 };  
 
-exports.getUserForLogin = (email, ) => {
+exports.getUserForLogin = (email ) => {
     return db.query
     ('SELECT * FROM users WHERE email = $1;', 
         [email]
+    ).then(response => response.rows[0]);
+};
+
+exports.updateBio = (userId, bio) => {
+    console.log ("userId, bio", userId, bio);  
+    
+    return db.query
+    ( `UPDATE users SET bio=$1 WHERE id=$2 RETURNING *;`,
+        [bio, userId]
     ).then(response => response.rows[0]);
 };
 

@@ -11,11 +11,6 @@ CREATE TABLE users
     bio VARCHAR(5000),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-INSERT INTO users
-    (id, firstname, lastname, email)
-VALUES
-    (1, 'Ute', 'Papas', 'ute@papas.de', 'fhdkhfw67rczizrzvberztvge');
-
 
 
 
@@ -232,5 +227,18 @@ CREATE TABLE passwordresets
     id SERIAL PRIMARY KEY,
     email VARCHAR(500) NOT NULL,
     code VARCHAR(6) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+DROP TABLE IF EXISTS friend_requests
+;
+CREATE TABLE friend_requests
+(
+    id SERIAL PRIMARY KEY,
+
+    from_id INTEGER REFERENCES users(id),
+    to_id INTEGER REFERENCES users(id),
+    accepted BOOLEAN,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

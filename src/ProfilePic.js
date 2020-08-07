@@ -8,21 +8,21 @@ export default class ProfilePic extends React.Component {
 
     render() {
         //props for App.js for ProfilePic 
-        const { firstname, lastname, profile_pic_url, clickHandler } = this.props;
+        const { firstname, lastname, profile_picture_url, clickHandler } = this.props;
         const fullName = `${firstname} ${lastname}`;
         console.log("fullName", fullName);  
         
-        if (!profile_pic_url) {
+        if (!profile_picture_url) {
 
             return (
                 <div id='profile_pic' className='pic_placeholder' onClick={clickHandler}>
-                    <img src='http://placebeard.it/200'/>
+                    <img src='static/mops.jpg'/>
                 </div>
             );
         } else {
             return (
                 <div id='profile_pic' onClick={clickHandler}>
-                    <img scr={profile_pic_url} alt={fullName} />
+                    <img src={profile_picture_url} alt={fullName} />
                 </div>
             );
         }     
