@@ -6,12 +6,19 @@ const ses = require("./ses.js");
 
 const passwords = require("./passwords.js");
 const cryptoRandomString = require("crypto-random-string");
-
+//AWS S3 Upload tools
 const multer = require("multer");
 const s3 = require("./s3.js");
-const uidSafe = require('uid-safe');
-const path = require('path');
+const uidSafe = require("uid-safe");
+const path = require("path");
 
+//COOKIE SESSION
+const cookieSession = require("cookie-session");
+router.use (cookieSession({
+    secret: "Life is a big enigma",
+    maxAge: 1000 * 60 * 60 * 24 * 69 //69 Tage 
+})
+);
 
 
 router.post("/api/v1/register", (request, response) => {
@@ -125,7 +132,6 @@ router.post("/api/v1/password-reset/set-password", (request, response) => {
 //Server User Details
 router.get("/api/v1/me", (request, response) => {
     const userId = request.session.userID;
-    
 
     if (!userId) {
         return response.json({});
@@ -204,7 +210,7 @@ router.post("/api/v1/user/profile-upload", uploader.single("file"), (request, re
         });
 });
 
-//get image????
+//get image
 router.get("/api/v1/user/image/:id", (request, response) => {
     db.getImage(request.params.id)
         .then((imageInfo) => {
@@ -222,17 +228,48 @@ router.get("/api/v1/user/image/:id", (request, response) => {
 router.post("/api/v1/user/bio", (request, response) => {
     const { bio } = request.body;
     console.log("request.body;", request.body);
-    console.log ("request.session", request.session);  
+    //console.log ("request.session", request.session);
     db.updateBio(request.session.userID, bio)
 
         .then((result) => {
-            console.log ('result', result);  
+            //console.log ('result', result);
             response.json({ success: true });
         })
         .catch((error) => {
             console.log("error", error);
             response.send({ success: false });
         });
+});
+
+
+
+//Get userId----------------------------------------------------
+
+router.get("/api/v1/user/:id", (request, response) => {
+    const userId = request.session.userId;
+  
+    if (!userId) {
+        return response.send({ success: false });
+    }
+    //if userID is loged in  -> redirect to home
+    else if (request.session.userId) {
+        return response.redirect("/");
+        
+    }
+    else {
+        db.getUser(request.params.id)
+            .then((userId) => {
+                response.json(userId);
+            })
+
+        
+            .catch((error) => {
+                response.status(500).json({
+                    success: false,
+                    error: error,
+                });
+            });
+    }
 });
 
 module.exports = router;

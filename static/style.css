@@ -108,3 +108,21 @@ body {
     background:  rgb(241, 207, 255) ;
 
 }
+
+.other_profile{
+    background:  rgb(144, 231, 151) ;
+}
+
+.show_bio{
+    background:  rgb(100, 114, 101) ;
+}
+
+.find_people{
+    background:  rgb(158, 211, 221) ; 
+}
+
+/* for FindPeople */
+.users {
+    background:  rgb(187, 149, 231) ; 
+
+}
