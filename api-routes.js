@@ -14,12 +14,12 @@ const path = require("path");
 
 //COOKIE SESSION
 const cookieSession = require("cookie-session");
-router.use (cookieSession({
-    secret: "Life is a big enigma",
-    maxAge: 1000 * 60 * 60 * 24 * 69 //69 Tage 
-})
+router.use(
+    cookieSession({
+        secret: "Life is a big enigma",
+        maxAge: 1000 * 60 * 60 * 24 * 69, //69 Tage
+    })
 );
-
 
 router.post("/api/v1/register", (request, response) => {
     const { firstname, lastname, email, password } = request.body;
@@ -129,6 +129,7 @@ router.post("/api/v1/password-reset/set-password", (request, response) => {
         }
     });
 });
+
 //Server User Details
 router.get("/api/v1/me", (request, response) => {
     const userId = request.session.userID;
@@ -169,46 +170,43 @@ const uploader = multer({
     },
 });
 
-//upload files to AWS S3----------------------------------------------------
-router.post("/api/v1/user/profile-upload", uploader.single("file"), (request, response) => {
+//upload files to AWS S3
+router.post("/api/v1/user/profile-upload",
+    uploader.single("file"),(request, response) => {
+        //console.log ("request, response", request, response);
+        const s3ImageURL = s3.generateBucketURL(request.file.filename);
+        console.log("s3ImageURL", s3ImageURL);
+        s3.uploadFile(request.file)
 
-    //console.log ("request, response", request, response);  
-    const s3ImageURL = s3.generateBucketURL(request.file.filename);
-    console.log ("s3ImageURL", s3ImageURL);  
-    s3.uploadFile(request.file)
+            .then(() => {
+                const {
+                    firstname,
+                    lastname,
+                    email,
+                    profile_picture_url,
+                } = request.body;
+                return db.addImage(s3ImageURL, request.session.userID);
+            })
 
-        .then(() => {
-            const {
-                firstname,
-                lastname,
-                email,
-                profile_picture_url,
-            } = request.body;
-            return db.addImage(
-                s3ImageURL,
-                request.session.userID,
+            .then((resultFromDb) => {
+                console.log("resultFromDb", resultFromDb);
 
-            );
-        })
+                response.json({
+                    success: true,
+                    //fileURL: s3ImageURL,
+                    ...resultFromDb,
+                });
+            })
 
-        .then((resultFromDb) => {
-            console.log ("resultFromDb", resultFromDb);  
-           
-            response.json({
-                success: true,
-                //fileURL: s3ImageURL,
-                ...resultFromDb,
+            .catch((error) => {
+                console.log("error", error);
+                response.status(500).json({
+                    success: false,
+                    error: error,
+                });
             });
-        })
-
-        .catch((error) => {
-            console.log ("error", error);  
-            response.status(500).json({
-                success: false,
-                error: error,
-            });
-        });
-});
+    }
+);
 
 //get image
 router.get("/api/v1/user/image/:id", (request, response) => {
@@ -241,30 +239,21 @@ router.post("/api/v1/user/bio", (request, response) => {
         });
 });
 
-
-
-//Other Profile 
+//Other Profile
 router.get("/api/v1/user/:id", (request, response) => {
     const userId = request.session.userID;
-    console.log ("userId", userId);  
-  
+    console.log("userId", userId);
+
     if (!userId) {
         return response.send({ success: false });
-    }
-    // //if userID is loged in  -> redirect to home
-    // else if (request.session.userID) {
-    //     return response.redirect("/");
-        
-    // }
-    else {
-        console.log ("request.params.id", request.params.id);  
+    } else {
+        console.log("request.params.id", request.params.id);
         db.getUser(request.params.id)
             .then((user) => {
-                console.log ("user", user);  
+                console.log("user", user);
                 response.json(user);
             })
 
-        
             .catch((error) => {
                 response.status(500).json({
                     success: false,
@@ -274,33 +263,30 @@ router.get("/api/v1/user/:id", (request, response) => {
     }
 });
 
-//Find people----------------------------------------------
-
-router.get('/api/v1/users/:query', (request, response) => {
+//Find people
+router.get("/api/v1/users/:query", (request, response) => {
     const query = request.params.query;
     if (!query) {
         return response.send({ success: false });
-
-    //else if ('') { }
-        
-
     } else {
-        db.getUsersList(request.userId)
+        db.findUsers(query)
             .then((userId) => {
                 response.json(userId);
-        
             })
             .catch((error) => {
+                console.log("error", error);
                 response.status(500).json({
                     success: false,
                     error: error,
                 });
             });
-        
     }
-
-  
-    
 });
+
+
+//Friend Button-----------------------------------------
+router.get("/api/v1/users/other:id", (request, response) => {
+    const userId = request.session.userID;
+}) 
 
 module.exports = router;

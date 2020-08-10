@@ -10,19 +10,24 @@ export default function FindPeople() {
     // Ajax Call
     useEffect(() => {
         let unnecessary;
-        async () => {
+        async function getData() {
             const { data } = await axios.get("/api/v1/users/" + query);
             //Unnecessary Ajax calls
+
             if (!unnecessary) {
                 setUsers(data);
                 console.log("DATA:", data);
             }
-        };
+        }
+        if (query) {
+            getData();
+        }
         return () => {
-            console.log ("Unnecessary Ajax calls:", unnecessary);  
+            console.log("Unnecessary Ajax calls:", unnecessary);
             unnecessary = true;
         };
     }, [query]);
+    console.log("users", users);
 
     return (
         <div className="find_people">
@@ -35,20 +40,20 @@ export default function FindPeople() {
             <div className="users">
                 {users.map((user) => (
                     <div key={user.id}>
-                        <Link to={'/query/' + user.id}>
+                        <Link to={"/user/" + user.id}>
                             <ProfilePic
-                                firstname={this.data.firstname}
-                                lastname= {this.data.lastname}
-                                profilePic= {this.data.profilePic}
+                                firstname={user.firstname}
+                                lastname={user.lastname}
+                                profilePic={user.profilePic}
                             />
                             <div>
-                                {user.firstname} {user.lastname} 
+                                {user.firstname} {user.lastname}
                             </div>
                         </Link>
-                        
                     </div>
                 ))}
-                {!users.length && <div id='no_results'>No Results</div> }
+                {!users.length &&
+                    <div id="no_results">No Results</div>}
             </div>
         </div>
     );

@@ -122,6 +122,13 @@ export default class App extends React.Component {
                                 />
                             )}
                         />
+                        <Route
+                            component={FindPeople}
+                            path='/users/'
+                        
+                        />
+
+                        
                     </BrowserRouter>
                 </div>
             );

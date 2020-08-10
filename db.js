@@ -111,7 +111,7 @@ exports.updateBio = (userId, bio) => {
 
 exports.getUsersList = (userId) => {
     return db
-        .query(`SELECT FROM * users WHERE id !=$1  ORDER BY id DESC LIMIT 4;`, [
+        .query(`SELECT * FROM users WHERE id !=$1  ORDER BY id DESC LIMIT 4;`, [
             userId,
         ])
         .then((response) => response.rows[0]);
@@ -120,7 +120,7 @@ exports.getUsersList = (userId) => {
 exports.findUsers = (firstname) => {
     return db
         .query(`SELECT * FROM users WHERE firstname ILIKE $1;`, [
-            firstname + '% %',
+            firstname + '%',
         ])
-        .then((response) => response.rows[0]);
+        .then((response) => response.rows);
 };
