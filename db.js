@@ -26,7 +26,7 @@ exports.addPasswordReset = (email, code) => {
 //Images----------------------
 
 exports.addImage = (profile_picture_url, id) => {
-    console.log("profile_picture_url, id", profile_picture_url, id);
+    //console.log("profile_picture_url, id", profile_picture_url, id);
     return db
         .query(
             `UPDATE users SET profile_picture_url=$1 WHERE id=$2 RETURNING *;`,
@@ -72,9 +72,15 @@ exports.getUserByEmail = (email) => {
 };
 
 exports.getUser = (userId) => {
+    //console.log ("userId", userId);  
     return db
         .query("SELECT * FROM users WHERE id = $1;", [userId])
-        .then((response) => response.rows[0]);
+
+        .then((response) => {
+            //console.log ("response", response);  
+            return response.rows[0];
+
+        });
 };
 
 exports.getCodeByEmail = (code, email) => {
@@ -93,7 +99,7 @@ exports.getUserForLogin = (email) => {
 };
 
 exports.updateBio = (userId, bio) => {
-    console.log("userId, bio", userId, bio);
+    //console.log("userId, bio", userId, bio);
 
     return db
         .query(`UPDATE users SET bio=$1 WHERE id=$2 RETURNING *;`, [
@@ -103,3 +109,18 @@ exports.updateBio = (userId, bio) => {
         .then((response) => response.rows[0]);
 };
 
+exports.getUsersList = (userId) => {
+    return db
+        .query(`SELECT FROM * users WHERE id !=$1  ORDER BY id DESC LIMIT 4;`, [
+            userId,
+        ])
+        .then((response) => response.rows[0]);
+};
+          
+exports.findUsers = (firstname) => {
+    return db
+        .query(`SELECT * FROM users WHERE firstname ILIKE $1;`, [
+            firstname + '% %',
+        ])
+        .then((response) => response.rows[0]);
+};

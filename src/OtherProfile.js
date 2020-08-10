@@ -8,19 +8,19 @@ export default class OtherProfile extends React.Component {
         super(props);
         this.state = {
             itsSelf: false,
-            friend: false,
+           
         };
     }
 
     componentDidMount() {
         const userId = this.props.match.params.id;
-        console.log("userId:", userId);
+        console.log("userId___:", userId);
 
         axios
-            .get('/api/v1/user' + userId)
+            .get('/api/v1/user/' + userId)
             .then(({ data }) => {
                 console.log("This is the data: ", data);
-                if (data.itsSelf || data.noMatch) {
+                if (data.itsSelf) {
                     this.props.history.push("/");
                 } else {
                     this.setState({

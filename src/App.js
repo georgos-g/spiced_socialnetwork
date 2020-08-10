@@ -4,10 +4,12 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import ProfilePic from "./ProfilePic.js";
 import ProfileComposition from "./ProfileComposition.js";
-import Profile from "./Profile.js";
+//import Profile from "./Profile.js";
 import BioEditor from "./BioEditor.js";
 import Uploader from "./Uploader.js";
 import OtherProfile from "./OtherProfile.js";
+import FindPeople from "./FindPeople.js";
+
 
 export default class App extends React.Component {
     constructor() {

@@ -243,23 +243,25 @@ router.post("/api/v1/user/bio", (request, response) => {
 
 
 
-//Get userId----------------------------------------------------
-
+//Other Profile 
 router.get("/api/v1/user/:id", (request, response) => {
-    const userId = request.session.userId;
+    const userId = request.session.userID;
+    console.log ("userId", userId);  
   
     if (!userId) {
         return response.send({ success: false });
     }
-    //if userID is loged in  -> redirect to home
-    else if (request.session.userId) {
-        return response.redirect("/");
+    // //if userID is loged in  -> redirect to home
+    // else if (request.session.userID) {
+    //     return response.redirect("/");
         
-    }
+    // }
     else {
+        console.log ("request.params.id", request.params.id);  
         db.getUser(request.params.id)
-            .then((userId) => {
-                response.json(userId);
+            .then((user) => {
+                console.log ("user", user);  
+                response.json(user);
             })
 
         
@@ -270,6 +272,35 @@ router.get("/api/v1/user/:id", (request, response) => {
                 });
             });
     }
+});
+
+//Find people----------------------------------------------
+
+router.get('/api/v1/users/:query', (request, response) => {
+    const query = request.params.query;
+    if (!query) {
+        return response.send({ success: false });
+
+    //else if ('') { }
+        
+
+    } else {
+        db.getUsersList(request.userId)
+            .then((userId) => {
+                response.json(userId);
+        
+            })
+            .catch((error) => {
+                response.status(500).json({
+                    success: false,
+                    error: error,
+                });
+            });
+        
+    }
+
+  
+    
 });
 
 module.exports = router;

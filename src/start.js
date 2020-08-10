@@ -4,11 +4,11 @@ import ReactDOM from "react-dom";
 import Welcome from "./Welcome.js";
 import App from "./App.js";
 
-const userIsLogedIn = location.pathname == "/";
+const userIsNotLogedIn = location.pathname == "/welcome";
 
-let primaryComponent = <Welcome />;
-if (userIsLogedIn) {
-    primaryComponent = <App />;
+let primaryComponent = <App />;
+if (userIsNotLogedIn) {
+    primaryComponent = <Welcome />;
 }
 
 ReactDOM.render(primaryComponent, document.getElementById("root"));
