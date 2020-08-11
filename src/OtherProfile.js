@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios.js";
 import ProfilePic from "./ProfilePic.js";
+import FriendButton from "./FriendButton.js";
 
 export default class OtherProfile extends React.Component {
     //define props
@@ -14,7 +15,7 @@ export default class OtherProfile extends React.Component {
 
     componentDidMount() {
         const userId = this.props.match.params.id;
-        console.log("userId___:", userId);
+        console.log("userId:", userId);
 
         axios
             .get('/api/v1/user/' + userId)
@@ -27,7 +28,7 @@ export default class OtherProfile extends React.Component {
                         id: data.id,
                         firstname: data.firstname,
                         lastname: data.lastname,
-                        profilePic: data.profilePic,
+                        profilePic: data.profile_picture_url,
                         bio: data.bio,
                     });
                 }
@@ -38,6 +39,9 @@ export default class OtherProfile extends React.Component {
         //
     }
     render() {
+        if (!this.state.id) {
+            return <div>...Loading</div>
+        }
         return (
             <div className='other_profile'>
                 <h1>
@@ -49,6 +53,8 @@ export default class OtherProfile extends React.Component {
                     profilePic={this.state.profilePic}
                 />
                 <p className='show_bio'>{this.state.bio}</p>
+
+                <FriendButton otherUserId={this.state.id} />
 
             </div>
         );

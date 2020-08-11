@@ -13,6 +13,30 @@ CREATE TABLE users
 );
 
 
+DROP TABLE IF EXISTS passwordresets
+;
+CREATE TABLE passwordresets
+(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(500) NOT NULL,
+    code VARCHAR(6) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+DROP TABLE IF EXISTS friend_requests
+;
+CREATE TABLE friend_requests
+(
+    id SERIAL PRIMARY KEY,
+
+    from_id INTEGER REFERENCES users(id),
+    to_id INTEGER REFERENCES users(id),
+    accepted BOOLEAN,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 
 INSERT INTO users
     (firstname, lastname, email, password_hash, profile_picture_url, bio)
@@ -220,25 +244,3 @@ VALUES
 
 
 
-DROP TABLE IF EXISTS passwordresets
-;
-CREATE TABLE passwordresets
-(
-    id SERIAL PRIMARY KEY,
-    email VARCHAR(500) NOT NULL,
-    code VARCHAR(6) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
-DROP TABLE IF EXISTS friend_requests
-;
-CREATE TABLE friend_requests
-(
-    id SERIAL PRIMARY KEY,
-
-    from_id INTEGER REFERENCES users(id),
-    to_id INTEGER REFERENCES users(id),
-    accepted BOOLEAN,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);

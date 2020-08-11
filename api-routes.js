@@ -225,7 +225,7 @@ router.get("/api/v1/user/image/:id", (request, response) => {
 //Route to update bio
 router.post("/api/v1/user/bio", (request, response) => {
     const { bio } = request.body;
-    console.log("request.body;", request.body);
+    //console.log("request.body;", request.body);
     //console.log ("request.session", request.session);
     db.updateBio(request.session.userID, bio)
 
@@ -284,9 +284,116 @@ router.get("/api/v1/users/:query", (request, response) => {
 });
 
 
-//Friend Button-----------------------------------------
-router.get("/api/v1/users/other:id", (request, response) => {
-    const userId = request.session.userID;
-}) 
+//Friend Requests Button-----------------------------------------
+const NO_REQUEST = "no-request";
+const REQUEST_MADE_BY_YOU = "request-made-by-you";
+const REQUEST_MADE_TO_YOU = "request-made-to-you";
+const REQUEST_ACCEPTED = "request-accepted";
+
+router.get("/api/v1/friend-request/:other_user_id", async(request, response) => {
+    const { userId } = request.session;
+    const { other_user_id } = request.params;
+    const friendRequest = await db.getFriendRequest(userId, other_user_id);
+    
+    console.log("friendRequest: ", friendRequest);  
+    
+    if (!friendRequest) {
+        return response.json({ status: NO_REQUEST});
+    }
+    else if (friendRequest.to_id==userId) {
+        return response.json({ status: REQUEST_MADE_TO_YOU});
+    }
+    else if (friendRequest.from_id==userId) {
+        return response.json({ status: REQUEST_MADE_BY_YOU});
+    }
+    else if (friendRequest.accepted) {
+        return response.json({ status: REQUEST_ACCEPTED});
+    }
+}); 
+//Make Request
+router.post("/api/v1/friend-request/make/:other_user_id", (request, response) => {
+    const { other_user_id } = request.params;
+    const { userId } = request.session;
+
+    db.addFriendRequest(other_user_id, userId)
+        .then((other_user_id ) => {
+            response.json({
+                success: true,
+                status: REQUEST_MADE_BY_YOU
+            });
+            console.log ("other_user_id:", other_user_id);  
+            
+        })
+        .catch((error) => {
+            response.status(500).json({
+                success: false,
+                error: error,
+            });
+        });
+});
+
+
+//Accept Request
+router.post("/api/v1/friend-request/accept/:other_user_id", (request, response) => {
+    const { other_user_id } = request.params;
+    const { userId } = request.session;
+
+    db.acceptFriendRequest(other_user_id, userId)
+        .then((other_user_id) => {
+            response.json({
+                success: true,
+                status: REQUEST_ACCEPTED
+            });             
+        })
+        .catch((error) => {
+            response.status(500).json({
+                success: false,
+                error: error,
+            });
+        });
+});
+
+//Cancel Request
+router.post("/api/v1/friend-request/cancel/:other_user_id", (request, response) => {
+    const { other_user_id } = request.params;
+    const { userId } = request.session;
+
+    db.deleteFriendRequest(other_user_id, userId)
+        .then((other_user_id) => {
+            response.json({
+                success: true,
+                status: REQUEST_ACCEPTED
+            });             
+        })
+        .catch((error) => {
+            response.status(500).json({
+                success: false,
+                error: error,
+            });
+        });
+});
+
+
+//Unfriend Request
+router.post("/api/v1/friend-request/unfriend/:other_user_id", (request, response) => {
+    const { other_user_id } = request.params;
+    const { userId } = request.session;
+
+    db.deleteFriendRequest(other_user_id, userId)
+        .then((other_user_id) => {
+            response.json({
+                success: true,
+                status: REQUEST_ACCEPTED
+            });             
+        })
+        .catch((error) => {
+            response.status(500).json({
+                success: false,
+                error: error,
+            });
+        });
+});
+
+//-------------------------------------------------------
 
 module.exports = router;

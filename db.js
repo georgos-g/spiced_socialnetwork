@@ -72,20 +72,19 @@ exports.getUserByEmail = (email) => {
 };
 
 exports.getUser = (userId) => {
-    //console.log ("userId", userId);  
+    //console.log ("userId", userId);
     return db
         .query("SELECT * FROM users WHERE id = $1;", [userId])
 
         .then((response) => {
-            //console.log ("response", response);  
+            //console.log ("response", response);
             return response.rows[0];
-
         });
 };
 
 exports.getCodeByEmail = (code, email) => {
     return db
-        .query("SELECT * FROM passwordresets WHERE email = $1 and code = $2;", [
+        .query("SELECT * FROM passwordresets WHERE email = $1 AND code = $2;", [
             email,
             code,
         ])
@@ -116,11 +115,70 @@ exports.getUsersList = (userId) => {
         ])
         .then((response) => response.rows[0]);
 };
-          
+
 exports.findUsers = (firstname) => {
     return db
         .query(`SELECT * FROM users WHERE firstname ILIKE $1;`, [
-            firstname + '%',
+            firstname + "%",
         ])
         .then((response) => response.rows);
+};
+
+//FRIEND BUTTON------------------------------------------
+
+//add
+exports.addFriendRequest = (from_id, to_id) => {///Check
+    return db
+        .query(
+            `INSERT INTO friend_requests 
+            (from_id, to_id) 
+            VALUES($1, $2) RETURNING *;`,
+            [from_id, to_id]
+        )
+        .then((response) => response.rows[0]);
+};
+
+//accept
+exports.acceptFriendRequest = (from_id, to_id) => {
+    return db
+        .query(
+            `UPDATE friend_requests 
+            SET accepted=TRUE 
+            WHERE 
+            (from_id=$1 AND to_id=$2)
+            OR
+            (from_id=$2 AND to_id=$1);`,
+            [from_id, to_id]
+        )
+        .then((response) => response.rows[0]);
+};
+
+
+//delete & unfirend 
+exports.deleteFriendRequest = (from_id, to_id) => {
+    return db
+        .query(
+            `UPDATE friend_requests 
+            SET accepted=FALSE 
+            WHERE 
+            (from_id=$1 AND to_id=$2)
+            OR
+            (from_id=$2 AND to_id=$1);`,
+            [from_id, to_id]
+        )
+        .then((response) => response.rows[0]);
+};
+
+//get 
+exports.getFriendRequest = (userId1, userId2) => {
+    return db
+        .query(
+            `SELECT * FROM friend_requests 
+            WHERE 
+            (from_id=$1 AND to_id=$2)
+            OR 
+            (from_id=$2 AND to_id=$1);`,
+            [userId1, userId2]
+        )
+        .then((response) => response.rows[0]);
 };

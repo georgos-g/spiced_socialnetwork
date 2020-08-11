@@ -1,0 +1,15 @@
+
+
+'make request'
+'/api/v1/friend-request/make/'
+
+'accept request'  
+'/api/v1/friend-request/accept/'
+
+
+'cancel request'  
+'/api/v1/friend-request/cancel/'
+
+
+'unfriend request'
+'/api/v1/friend-request/unfriend/'
