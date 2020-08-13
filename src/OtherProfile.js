@@ -40,7 +40,7 @@ export default class OtherProfile extends React.Component {
     }
     render() {
         if (!this.state.id) {
-            return <div>...Loading</div>
+            return <div>...Loading</div>;
         }
         return (
             <div className='other_profile'>

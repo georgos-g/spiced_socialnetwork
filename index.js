@@ -6,6 +6,8 @@ const csurf = require('csurf');
 const apiRoutes = require('./api-routes.js');
 
 //const hashing = require('./passwords.js');
+//Socket.io 
+//const server etc
 
 
 

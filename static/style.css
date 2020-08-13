@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Markazi+Text|Roboto:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,400i,700,700i');
 
 body {
     background: dimgray;
@@ -56,20 +56,20 @@ body {
    position: absolute;
     height: 100px;
     width: 100px;
-    border-radius: 5px;
+    border-radius: 25%;
     right: 15px;
     top: 10px;
-    object-fit: contain;
-
+    
 
     background:  rgb(172, 155, 172) ;
 }
 
 #profile_pic img{
+  
     height: 100px;
-    width: auto;
-    object-fit: contain;
-    border-radius: 5px;
+    width: 100px;
+    border-radius: 25%;
+    object-fit: cover;
 }
 
 .pic_placeholder{
@@ -93,10 +93,12 @@ body {
     background:  rgb(204, 151, 108) ;
 }
 .close_button{
+    
+    font-size: 18px;
     position: absolute;
-    top: 10px;
+    top: 6px;
     right: 10px;
-    background:  rgb(243, 79, 79) ;
+    
 }
 
 .profile{
@@ -130,4 +132,15 @@ body {
 
 #no_results{
     background:  rgb(228, 35, 77) ; 
+}
+
+.friend{
+    background:  rgb(117, 133, 64) ; 
+
+}
+
+
+.wannabe{
+    background:  rgb(94, 97, 85) ; 
+
 }

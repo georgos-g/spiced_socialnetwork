@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "./axios.js";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import ProfilePic from "./ProfilePic.js";
 import ProfileComposition from "./ProfileComposition.js";
@@ -9,14 +9,14 @@ import BioEditor from "./BioEditor.js";
 import Uploader from "./Uploader.js";
 import OtherProfile from "./OtherProfile.js";
 import FindPeople from "./FindPeople.js";
-
+import Friends from "./Friends.js";
 
 export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
             user: "null",
-            uploaderVisible: "false",
+            uploaderVisible: false,
         };
     }
     componentDidMount() {
@@ -34,24 +34,14 @@ export default class App extends React.Component {
         } else {
             return (
                 <div className="user">
-                    {/* You are In Hi {user.firstname} :-)
-                    <Profile
-                        firstname={user.firstname}
-                        lastname={user.lastname}
-                        profilePic={
-                             */}
-                    
                     <ProfilePic
                         firstname={user.firstname}
                         lastname={user.lastname}
-                        profile_picture_url={user.profile_picture_url}
+                        profilePic={user.profile_picture_url}
                         clickHandler={(e) =>
                             this.setState({ uploaderVisible: true })
                         }
                     />
-                    {/* }
-                       
-                    /> */}
 
                     {uploaderVisible && (
                         <Uploader
@@ -73,6 +63,12 @@ export default class App extends React.Component {
                     <p>Tell us a secret!</p>
 
                     <BrowserRouter>
+                        <nav >
+                            <Link to="/">MySelf</Link> --
+                            <Link to="/users">Find Others</Link> --
+                            <Link to="/friends">Friends</Link> --
+                            <Link to="/find">User</Link>
+                        </nav>
                         <Route
                             exact
                             path="/"
@@ -81,11 +77,10 @@ export default class App extends React.Component {
                                     firstname={user.firstname}
                                     lastname={user.lastname}
                                     profilePic={
-                                        //--------------------------------
                                         <ProfilePic
                                             firstname={user.firstname}
                                             lastname={user.lastname}
-                                            profile_picture_url={
+                                            profilePic={
                                                 user.profile_picture_url
                                             }
                                             clickHandler={(e) =>
@@ -96,7 +91,6 @@ export default class App extends React.Component {
                                         />
                                     }
                                     bioEditor={
-                                    
                                         <BioEditor
                                             bio={user.bio}
                                             saveHandler={(newBio) => {
@@ -122,13 +116,9 @@ export default class App extends React.Component {
                                 />
                             )}
                         />
-                        <Route
-                            component={FindPeople}
-                            path='/users/'
-                        
-                        />
+                        <Route component={FindPeople} path="/users/" />
 
-                        
+                        <Route component={Friends} path="/friends/" />
                     </BrowserRouter>
                 </div>
             );

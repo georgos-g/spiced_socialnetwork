@@ -117,9 +117,9 @@ router.post("/api/v1/password-reset/set-password", (request, response) => {
         if (result) {
             //hash the password
             db.getUserByEmail(email).then((user) => {
-                const userId = user.id;
+                const userID = user.id;
                 passwords.hash(password).then((password_hash) => {
-                    db.updatePassword(userId, password_hash).then((result) => {
+                    db.updatePassword(userID, password_hash).then((result) => {
                         response.json({ success: true });
                     });
                 });
@@ -132,12 +132,12 @@ router.post("/api/v1/password-reset/set-password", (request, response) => {
 
 //Server User Details
 router.get("/api/v1/me", (request, response) => {
-    const userId = request.session.userID;
+    const userID = request.session.userID;
 
-    if (!userId) {
+    if (!userID) {
         return response.json({});
     } else {
-        db.getUser(userId)
+        db.getUser(userID)
 
             .then((user) => {
                 console.log("user", user);
@@ -241,10 +241,10 @@ router.post("/api/v1/user/bio", (request, response) => {
 
 //Other Profile
 router.get("/api/v1/user/:id", (request, response) => {
-    const userId = request.session.userID;
-    console.log("userId", userId);
+    const userID = request.session.userID;
+    console.log("userID", userID);
 
-    if (!userId) {
+    if (!userID) {
         return response.send({ success: false });
     } else {
         console.log("request.params.id", request.params.id);
@@ -270,8 +270,8 @@ router.get("/api/v1/users/:query", (request, response) => {
         return response.send({ success: false });
     } else {
         db.findUsers(query)
-            .then((userId) => {
-                response.json(userId);
+            .then((userID) => {
+                response.json(userID);
             })
             .catch((error) => {
                 console.log("error", error);
@@ -291,31 +291,31 @@ const REQUEST_MADE_TO_YOU = "request-made-to-you";
 const REQUEST_ACCEPTED = "request-accepted";
 
 router.get("/api/v1/friend-request/:other_user_id", async(request, response) => {
-    const { userId } = request.session;
+    const { userID } = request.session;
     const { other_user_id } = request.params;
-    const friendRequest = await db.getFriendRequest(userId, other_user_id);
+    const friendRequest = await db.getFriendRequest(userID, other_user_id);
     
     console.log("friendRequest: ", friendRequest);  
     
     if (!friendRequest) {
         return response.json({ status: NO_REQUEST});
     }
-    else if (friendRequest.to_id==userId) {
-        return response.json({ status: REQUEST_MADE_TO_YOU});
-    }
-    else if (friendRequest.from_id==userId) {
-        return response.json({ status: REQUEST_MADE_BY_YOU});
-    }
     else if (friendRequest.accepted) {
         return response.json({ status: REQUEST_ACCEPTED});
+    }
+    else if (friendRequest.to_id==userID) {
+        return response.json({ status: REQUEST_MADE_TO_YOU});
+    }
+    else if (friendRequest.from_id==userID) {
+        return response.json({ status: REQUEST_MADE_BY_YOU});
     }
 }); 
 //Make Request
 router.post("/api/v1/friend-request/make/:other_user_id", (request, response) => {
     const { other_user_id } = request.params;
-    const { userId } = request.session;
+    const { userID } = request.session;
 
-    db.addFriendRequest(other_user_id, userId)
+    db.addFriendRequest(other_user_id, userID)
         .then((other_user_id ) => {
             response.json({
                 success: true,
@@ -336,9 +336,9 @@ router.post("/api/v1/friend-request/make/:other_user_id", (request, response) =>
 //Accept Request
 router.post("/api/v1/friend-request/accept/:other_user_id", (request, response) => {
     const { other_user_id } = request.params;
-    const { userId } = request.session;
+    const { userID } = request.session;
 
-    db.acceptFriendRequest(other_user_id, userId)
+    db.acceptFriendRequest(other_user_id, userID)
         .then((other_user_id) => {
             response.json({
                 success: true,
@@ -356,9 +356,9 @@ router.post("/api/v1/friend-request/accept/:other_user_id", (request, response) 
 //Cancel Request
 router.post("/api/v1/friend-request/cancel/:other_user_id", (request, response) => {
     const { other_user_id } = request.params;
-    const { userId } = request.session;
+    const { userID } = request.session;
 
-    db.deleteFriendRequest(other_user_id, userId)
+    db.deleteFriendRequest(other_user_id, userID)
         .then((other_user_id) => {
             response.json({
                 success: true,
@@ -377,9 +377,9 @@ router.post("/api/v1/friend-request/cancel/:other_user_id", (request, response) 
 //Unfriend Request
 router.post("/api/v1/friend-request/unfriend/:other_user_id", (request, response) => {
     const { other_user_id } = request.params;
-    const { userId } = request.session;
+    const { userID } = request.session;
 
-    db.deleteFriendRequest(other_user_id, userId)
+    db.deleteFriendRequest(other_user_id, userID)
         .then((other_user_id) => {
             response.json({
                 success: true,
@@ -394,6 +394,22 @@ router.post("/api/v1/friend-request/unfriend/:other_user_id", (request, response
         });
 });
 
-//-------------------------------------------------------
+//Redux
+router.get("/api/v1/friends_and_wannabes", (request, response) => {
+   
+    db.getFriendsAndWannabes(request.session.userID)
+        .then((friends) => {
+            console.log("friends", friends);
+            response.json({ success: true, friends });           
+        })
+
+        .catch((error) => {
+            response.status(500).json({
+                success: false,
+                error: error,
+            });
+        });
+    
+});
 
 module.exports = router;

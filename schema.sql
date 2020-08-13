@@ -37,6 +37,20 @@ CREATE TABLE friend_requests
 );
 
 
+CREATE TABLE chat_messages
+(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) NOT NULL,
+    message_text TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+INSERT INTO chat_messages 
+(user_id, message_text) 
+VALUES 
+(33, 'Hi'),
+(44, 'How are you???');
 
 INSERT INTO users
     (firstname, lastname, email, password_hash, profile_picture_url, bio)
