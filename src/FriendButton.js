@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "./axios.js";
+import { cancel, unFriend, acceptRequest } from "./actions.js";
 
 const NO_REQUEST = "no-request";
 const REQUEST_MADE_BY_YOU = "request-made-by-you";
@@ -10,11 +11,11 @@ const REQUEST_ACCEPTED = "request-accepted";
 
 export default function FriendButton(props) {
     const [status, setStatus] = useState();
-    console.log ("props", props);  
+    //console.log ("props", props);  
 
     const fetchData = async () => {
-        console.log("fetchData", fetchData);  
-        console.log("props.otherUserId", props.otherUserId); 
+        //console.log("fetchData", fetchData);  
+        //console.log("props.otherUserId", props.otherUserId); 
         
         const response = await axios.get("/api/v1/friend-request/" + props.otherUserId);
         
@@ -40,9 +41,19 @@ export default function FriendButton(props) {
     } else if (status == REQUEST_ACCEPTED) {
         return (<button onClick={e=> makeAjaxCall("unfriend")}>UNFRIEND</button>);   
     } else {
-        return (<div> Oops something went wrong!!!</div>);
-        
-
+        return (<div> Oops something went wrong!!!</div>);        
     }
+
+    //----------------------------
+    if (action == "unfriend-request") {
+        dispatch(unFriend(props.id));
+    } else if (action == "accept-request") {
+        dispatch(acceptRequest(props.id));
+    } else if (action == "cancel-request") {
+        dispatch(cancelRequest(props.id));
+    }
+    
+
+
     
 }

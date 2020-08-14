@@ -196,3 +196,12 @@ exports.getFriendsAndWannabes = (userId) => {
         )
         .then((response) => response.rows);
 };
+
+//All Users
+exports.getAllUsers = (userId) => {
+    return db
+        .query(`SELECT * FROM users WHERE id !=$1  ORDER BY id DESC;`,
+            [userId]
+        )
+        .then((response) => response.rows);
+};

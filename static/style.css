@@ -135,7 +135,17 @@ body {
 }
 
 .friend{
+
     background:  rgb(117, 133, 64) ; 
+
+}
+
+.friend img{
+    height: 100px;
+    width: 100px;
+    border-radius: 5%;
+    object-fit: cover;
+
 
 }
 
@@ -143,4 +153,9 @@ body {
 .wannabe{
     background:  rgb(94, 97, 85) ; 
 
+}
+
+
+.all_users{
+    background:  rgb(94, 97, 85) ; 
 }

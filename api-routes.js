@@ -140,7 +140,7 @@ router.get("/api/v1/me", (request, response) => {
         db.getUser(userID)
 
             .then((user) => {
-                console.log("user", user);
+                //console.log("user", user);
                 delete user.password_hash;
                 response.json(user);
             })
@@ -175,7 +175,7 @@ router.post("/api/v1/user/profile-upload",
     uploader.single("file"),(request, response) => {
         //console.log ("request, response", request, response);
         const s3ImageURL = s3.generateBucketURL(request.file.filename);
-        console.log("s3ImageURL", s3ImageURL);
+        //console.log("s3ImageURL", s3ImageURL);
         s3.uploadFile(request.file)
 
             .then(() => {
@@ -189,7 +189,7 @@ router.post("/api/v1/user/profile-upload",
             })
 
             .then((resultFromDb) => {
-                console.log("resultFromDb", resultFromDb);
+                //console.log("resultFromDb", resultFromDb);
 
                 response.json({
                     success: true,
@@ -242,15 +242,15 @@ router.post("/api/v1/user/bio", (request, response) => {
 //Other Profile
 router.get("/api/v1/user/:id", (request, response) => {
     const userID = request.session.userID;
-    console.log("userID", userID);
+    //console.log("userID", userID);
 
     if (!userID) {
         return response.send({ success: false });
     } else {
-        console.log("request.params.id", request.params.id);
+        //console.log("request.params.id", request.params.id);
         db.getUser(request.params.id)
             .then((user) => {
-                console.log("user", user);
+                //console.log("user", user);
                 response.json(user);
             })
 
@@ -295,7 +295,7 @@ router.get("/api/v1/friend-request/:other_user_id", async(request, response) => 
     const { other_user_id } = request.params;
     const friendRequest = await db.getFriendRequest(userID, other_user_id);
     
-    console.log("friendRequest: ", friendRequest);  
+    //console.log("friendRequest: ", friendRequest);  
     
     if (!friendRequest) {
         return response.json({ status: NO_REQUEST});
@@ -321,7 +321,7 @@ router.post("/api/v1/friend-request/make/:other_user_id", (request, response) =>
                 success: true,
                 status: REQUEST_MADE_BY_YOU
             });
-            console.log ("other_user_id:", other_user_id);  
+            //console.log ("other_user_id:", other_user_id);  
             
         })
         .catch((error) => {
@@ -399,7 +399,7 @@ router.get("/api/v1/friends_and_wannabes", (request, response) => {
    
     db.getFriendsAndWannabes(request.session.userID)
         .then((friends) => {
-            console.log("friends", friends);
+            //console.log("friends", friends);
             response.json({ success: true, friends });           
         })
 
@@ -411,5 +411,25 @@ router.get("/api/v1/friends_and_wannabes", (request, response) => {
         });
     
 });
+
+
+//show all users
+router.get("/api/v1/all-users", (request, response) => {
+    
+    db.getAllUsers(request.session.userID)
+        .then((users) => {
+            //console.log("users", users);  
+            response.json({ success: true, users });
+        })
+        .catch((error) => {
+            response.status(500).json({
+                success: false,
+                error: error,
+            });
+        });
+    
+});
+
+
 
 module.exports = router;

@@ -4,10 +4,11 @@ import ProfilePic from "./ProfilePic.js";
 import { Link } from "react-router-dom";
 
 export default function FindPeople() {
+    //hooks
     const [users, setUsers] = useState([]);
     const [query, setQuery] = useState("");
 
-    // Ajax Call
+    // Ajax Call Hook
     useEffect(() => {
         let unnecessary;
         async function getData() {
@@ -16,18 +17,18 @@ export default function FindPeople() {
 
             if (!unnecessary) {
                 setUsers(data);
-                console.log("DATA:", data);
+                //console.log("DATA:", data);
             }
         }
         if (query) {
             getData();
         }
         return () => {
-            console.log("Unnecessary Ajax calls:", unnecessary);
+            //console.log("Unnecessary Ajax calls:", unnecessary);
             unnecessary = true;
         };
     }, [query]);
-    console.log("users", users);
+    // console.log("users", users);
 
     return (
         <div className="find_people">

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ProfilePic from "./ProfilePic.js";
+//import ProfilePic from "./ProfilePic.js";
 import FriendButton from "./FriendButton.js";
 import FriendCmp from "./FriendCmp.js";
 
-import { loadFriendsList, unFriend } from "./actions.js";
+import { loadFriendsList, unFriend, acceptRequest } from "./actions.js";
 
 export default function Friends() {
     
@@ -31,18 +31,19 @@ export default function Friends() {
             return [];
         } else {
             return state.friends.filter((friend) => {
-                return friend.accepted == true;
+                return friend.accepted == false;
             });
         }
     });
-
+    console.log("wannabes", wannabes);  
+    console.log ("friends", friends);  
     return (
         <div>
             <h2>Requests for Friendship  </h2>
             {wannabes.length > 0 &&
                 wannabes.map((friend) => (
                     <Friend key={friend.id} {...friend} />
-                                 
+
                 ))}
 
             {wannabes.length == 0 && (
@@ -63,14 +64,15 @@ function Friend(props) {
     return (
         <div className="friend">
             <img src={props.profile_picture_url}/>
-            <FriendCmp firstname={props.firstname} lastname={props.lastname}/>
+            <FriendCmp firstname={props.firstname} lastname={props.lastname}bio={props.bio}/>
             <Link to={"/user/" + props.id}>Look at the Profile</Link>
 
 
             <FriendButton
                 otherUserId={props.id}
-                onClick={(e) => dispatch(unfriend(props.id))}
+                onClick={(e) => dispatch(unFriend(props.id))}
             />
         </div>
     );
 }
+

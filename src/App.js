@@ -4,12 +4,15 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import ProfilePic from "./ProfilePic.js";
 import ProfileComposition from "./ProfileComposition.js";
-//import Profile from "./Profile.js";
+import Profile from "./Profile.js";
 import BioEditor from "./BioEditor.js";
 import Uploader from "./Uploader.js";
 import OtherProfile from "./OtherProfile.js";
 import FindPeople from "./FindPeople.js";
 import Friends from "./Friends.js";
+import AllUsers from "./AllUsers.js";
+
+
 
 export default class App extends React.Component {
     constructor() {
@@ -67,7 +70,7 @@ export default class App extends React.Component {
                             <Link to="/">MySelf</Link> --
                             <Link to="/users">Find Others</Link> --
                             <Link to="/friends">Friends</Link> --
-                            <Link to="/find">User</Link>
+                            <Link to="/all-users">All User</Link>
                         </nav>
                         <Route
                             exact
@@ -119,6 +122,8 @@ export default class App extends React.Component {
                         <Route component={FindPeople} path="/users/" />
 
                         <Route component={Friends} path="/friends/" />
+
+                        <Route component={AllUsers} path="/all-users/" />
                     </BrowserRouter>
                 </div>
             );
