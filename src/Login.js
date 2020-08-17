@@ -66,8 +66,8 @@ export default class Register extends React.Component {
 
 
                 Forgot your password? 
-                Here you can <Link to="/password-reset">reset your password</Link>. 
-                You wana register ? Here <Link to="/">you can</Link>.
+                <Link to="/password-reset">Reset your password.</Link> 
+                You wana register ?  <Link to="/">Here you can.</Link>
 
 
             </div>

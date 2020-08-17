@@ -15,7 +15,7 @@
 }
 
 body {
-    background: dimgray;
+    background: #8f8f80;;
     color: white;
     padding: 0;
     margin: 0;
@@ -74,16 +74,24 @@ p > a:focus {
     justify-content: center;
     flex-direction: column;
 }
+
+.profil_image img{
+    width: 400px;
+    height: 400px;
+    border-radius: 5%;
+    object-fit: cover;
+}
+
 .login {
-    background: lightskyblue;
+    background: #6f706c;;
 }
 
 .reset_password {
-    background: rgb(78, 96, 107);
+    background:  #5e6155;
 }
 
 .register {
-    background: rgb(163, 146, 175);
+    background: #5e6155;
 }
 
 .error {
@@ -91,10 +99,11 @@ p > a:focus {
 }
 
 .welcome {
-    background: rgb(207, 189, 145);
+    margin-top: 10px;
+    background:  #8f8f80;
 }
 .user {
-    background: thistle;
+    background: #8f8f80;
 }
 #profile_pic {
     position: absolute;
@@ -114,7 +123,7 @@ p > a:focus {
 }
 
 .pic_placeholder {
-    background: rgb(142, 160, 143);
+    background:  #5e6155;
 }
 
 #uploader {
@@ -150,7 +159,7 @@ button {
 a.hvr-bounce-to-top {
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
-    background-color: #e1e1e1;
+    background-color:  #5e6155;
     box-shadow: transparent 0 0 1px;
     color: #666;
     cursor: pointer;
@@ -169,32 +178,32 @@ a.hvr-bounce-to-top {
     cursor: pointer;
 }
 .profile {
-    background: rgb(90, 84, 92);
+    background:  #5e6155;
 }
 
 .bio_editor {
-    background: rgb(241, 207, 255);
+    background:  #5e6155;
 }
 
 .other_profile {
-    background: rgb(144, 231, 151);
+    background:  #5e6155;
 }
 
 .show_bio {
-    background: rgb(100, 114, 101);
+    background:  #5e6155;
 }
 
 .find_people {
-    background: rgb(158, 211, 221);
+    background:  #5e6155;
 }
 
 /* for FindPeople */
 .users {
-    background: rgb(187, 149, 231);
+    background:  #c0c0c0;;
 }
 
 #no_results {
-    background: rgb(228, 35, 77);
+    background:  #5e6155;
 }
 
 .friend {
@@ -205,7 +214,7 @@ a.hvr-bounce-to-top {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    background: rgb(117, 133, 64);
+    background: #5e6155;
 }
 
 .friend img {
@@ -222,12 +231,13 @@ a.hvr-bounce-to-top {
     width: 600px;
 }
 .wannabe {
-    background: rgb(94, 97, 85);
+    background: #5e6155;
 }
 
 .all_users {
+    padding-top: 20px;
     text-align: center;
-    background: rgb(94, 97, 85);
+    background: #5e6155;;
     object-fit: cover;
     display: flex;
     flex-direction: row;
@@ -256,36 +266,67 @@ a.hvr-bounce-to-top {
 }
 
 .chat {
-    background: rgb(117, 133, 64);
+    padding: 20px;
+
+    background: rgb(74, 75, 70);
+  
 }
 
 .chat-content {
+    margin: auto;
+    padding:10px;
+    max-width: 800px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    background: rgb(92, 97, 75);
+    border-radius: 4px;
+    background: rgb(102, 104, 99);
 }
 .chat_single {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    background: rgba(207, 207, 207, 0.4); 
+    padding: 10px;
+    width: 360px;
+    margin: 10px;
+    clear: both;
+    border-radius: 5px;
+   
+
+
 }
 .chat_single img {
-    height: 180px;
-    width: 150px;
+    
+    height: 120px;
+    width: 110px;
     border-radius: 5%;
     object-fit: cover;
-    padding-right: 5px;
-    padding-left: 5px;
+   
 }
 #chat_name {
+    align: left;
+    font-size:13px
 }
 
 .chat_date-message_wrap {
+    width: 400px;
 }
 
-.chat-message-date {
+
+
+.chat-text { 
+    padding-left: 10px;
+    padding-right: 6px ;
+    width: 260px;
+    word-break: break-all;
 }
 
-.chat-text {
+.chat_input_field{
+    margin-top: 10px;
+    width: 300px;
     height: 40px;
-    width: 150px;
+    margin-bottom: 8px;
 }
+

@@ -9,6 +9,9 @@ export default function Welcome() {
     return (
         <div className="welcome">
             <h1>Welcome Secret Friends </h1>
+            <div className='profil_image'>
+                <img src="./static/lovehoney.jpg" alt=""/>
+            </div>
 
             {/* React Routing-Bibliothek  */}
             <HashRouter>
