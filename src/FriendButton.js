@@ -59,7 +59,7 @@ export default function FriendButton(props) {
 
     //----------------------------
 
-    function Button(action) {
+    function button(action) {
         const dispatch = useDispatch();
         if (action == "unfriend") {
             dispatch(unFriend(props.id));
@@ -70,6 +70,8 @@ export default function FriendButton(props) {
         }
     }
 
+
+    button(); 
     //----------------------------
 
 }

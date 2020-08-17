@@ -8,8 +8,6 @@ import FriendCmp from "./FriendCmp.js";
 import { loadFriendsList, unFriend, acceptRequest } from "./actions.js";
 
 export default function Friends() {
-    
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -35,15 +33,14 @@ export default function Friends() {
             });
         }
     });
-    console.log("wannabes", wannabes);  
-    console.log ("friends", friends);  
+    //console.log("wannabes", wannabes);
+    //console.log ("friends", friends);
     return (
         <div>
-            <h2>Requests for Friendship  </h2>
+            <h2>Requests for Friendship </h2>
             {wannabes.length > 0 &&
                 wannabes.map((friend) => (
                     <Friend key={friend.id} {...friend} />
-
                 ))}
 
             {wannabes.length == 0 && (
@@ -63,16 +60,20 @@ function Friend(props) {
     const dispatch = useDispatch();
     return (
         <div className="friend">
-            <img src={props.profile_picture_url}/>
-            <FriendCmp firstname={props.firstname} lastname={props.lastname}bio={props.bio}/>
-            <Link to={"/user/" + props.id}>Look at the Profile</Link>
+            <img src={props.profile_picture_url} />
+            <div className='friend_data'>
+                <FriendCmp
+                    firstname={props.firstname}
+                    lastname={props.lastname}
+                    bio={props.bio}
+                />
+                <Link to={"/user/" + props.id}>Look at the Profile</Link>
 
-
-            <FriendButton
-                otherUserId={props.id}
-                onClick={(e) => dispatch(unFriend(props.id))}
-            />
+                <FriendButton
+                    otherUserId={props.id}
+                    onClick={(e) => dispatch(unFriend(props.id))}
+                />
+            </div>
         </div>
     );
 }
-

@@ -33,7 +33,7 @@ export default function Chat() {
                             </div>
                         </Link>
                         <div className='chat_date-message_wrap'>
-                            <div className='chat-message-date'>{message.created_at}</div>
+                            {/* <div className='chat-message-date'>{message.created_at}</div> */}
                             <div className='chat-text'>
                                 {message.message_text}
                             </div>

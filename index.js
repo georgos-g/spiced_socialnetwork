@@ -110,14 +110,14 @@ io.on('connection', async function (socket) {
                 user_id: rows.user_id 
                 
             };
-            console.log ("newMessage:", newMessage);  
+            //console.log ("newMessage:", newMessage);  
             io.sockets.emit('chatMessage', newMessage);
             
                
         })
             
             .catch((error) => {
-                console.log("NEWMessageError__: ", error);
+                //console.log("NEWMessageError__: ", error);
             });
         
         

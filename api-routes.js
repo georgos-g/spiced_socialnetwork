@@ -383,7 +383,7 @@ router.post("/api/v1/friend-request/unfriend/:other_user_id", (request, response
         .then((other_user_id) => {
             response.json({
                 success: true,
-                status: REQUEST_ACCEPTED
+                status: NO_REQUEST
             });             
         })
         .catch((error) => {
