@@ -10,7 +10,7 @@ export default function AllUsers() {
     // Ajax Call Hook
     useEffect(() => {
         async function getData() {
-            //data contains all json  
+            //data contains all json
             const { data } = await axios.get("/api/v1/all-users");
 
             setUsers(data.users);
@@ -18,24 +18,26 @@ export default function AllUsers() {
         }
 
         getData();
+    }, []);
 
-    },[]);
-
-    //console.log ("users", users);  
+    //console.log ("users", users);
     return (
-        <div className="all_users">
+        <div className="all_users_h">
             <h2>All the Secret People </h2>
-            {users.map((user) => (
-                <div key={user.id}>
-                    <Link to={"/user/" + user.id}>
-                       
-                        <div>
-                            {user.firstname} {user.lastname}
-                            <img src={user.profile_picture_url}></img>
-                        </div>
-                    </Link>
-                </div>
-            ))}
+            <div className="all_users">
+                {users.map((user) => (
+                    <div key={user.id}>
+                        <Link to={"/user/" + user.id}>
+                            <div>
+                                <img src={user.profile_picture_url}></img>
+                            </div>
+                            <div className="all_users_txt">
+                                {user.firstname} {user.lastname}
+                            </div>
+                        </Link>
+                    </div>
+                ))}
+            </div>
         </div>
-    );  
+    );
 }

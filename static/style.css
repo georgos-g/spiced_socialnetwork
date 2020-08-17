@@ -1,4 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,400i,700,700i');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,400i,700,700i");
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(121, 128, 133);
+    border-radius: 4;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(187, 190, 191);
+}
+::-webkit-scrollbar-track {
+    background-color: rgb(58, 58, 58);
+}
 
 body {
     background: dimgray;
@@ -6,156 +20,253 @@ body {
     padding: 0;
     margin: 0;
     font-size: 14px;
-    font-family:   'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 300;
-    text-align: center ;
+    text-align: center;
     height: 100%;
 }
 
-.center{
+h1,
+h2,
+h3 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+a {
+    font-weight: 500;
+    color: rgb(22, 22, 22);
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p > a {
+    border-bottom: 0px solid rgba(44, 170, 223, 0);
+}
+
+p > a:visited {
+    color: none;
+    text-decoration: none;
+}
+
+p > a:visited:hover,
+p > a:visited:focus {
+    color: none;
+    text-decoration: none;
+}
+
+p > a:hover,
+p > a:focus {
+    color: none;
+    border-bottom: 0px solid #2caadf;
+}
+
+.center {
     display: flex;
     flex-flow: wrap;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
-
 }
-.login{
+.login {
     background: lightskyblue;
-
 }
 
-.reset_password{
-
-    background: rgb(78, 96, 107)
-
-
-
+.reset_password {
+    background: rgb(78, 96, 107);
 }
 
-.register{
-    background: rgb(163, 146, 175)
-
+.register {
+    background: rgb(163, 146, 175);
 }
 
-
-.error{
-    background: rgb(230, 128, 191)
+.error {
+    background: rgb(230, 128, 191);
 }
 
-.welcome{
-
-    background: rgb(207, 189, 145)
-    
+.welcome {
+    background: rgb(207, 189, 145);
 }
-.user{
-    background:  thistle ;
+.user {
+    background: thistle;
 }
-#profile_pic{
-   position: absolute;
+#profile_pic {
+    position: absolute;
     height: 100px;
     width: 100px;
     border-radius: 25%;
     right: 15px;
     top: 10px;
-    
-
-    background:  rgb(172, 155, 172) ;
 }
 
-#profile_pic img{
-  
+#profile_pic img {
     height: 100px;
     width: 100px;
     border-radius: 25%;
     object-fit: cover;
+    cursor: pointer;
 }
 
-.pic_placeholder{
-    background:  rgb(142, 160, 143) ;
+.pic_placeholder {
+    background: rgb(142, 160, 143);
 }
 
-#uploader{
-    margin: 0;
-      position: relative;
-      border-radius: 5px;
-    
+#uploader {
+    position: absolute;
+    border-radius: 5px;
     width: 500px;
-    height: 60px;
-        background:  rgb(127, 153, 195) ;
-    top: 50%;
+    height: 90px;
+    background: rgb(20, 20, 20, 0.8);
+    top: 10%;
     left: 50%;
     transform: translate(-50%, 50%);
 }
 
-.uploader_content{
-    background:  rgb(204, 151, 108) ;
-}
-.close_button{
-    
-    font-size: 18px;
+.uploader_content {
+  
     position: absolute;
-    top: 6px;
-    right: 10px;
-    
+    margin: 5px;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.close_button {
+    font-size: 19px;
+    position: absolute;
+    top: 3px;
+    right: 11px;
+    cursor: pointer;
+}
+button {
+    margin: 10px;
+    cursor: pointer;
 }
 
-.profile{
-    background:  rgb(90, 84, 92) ;
-    
+a.hvr-bounce-to-top {
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
+        background-color: #e1e1e1;
+        box-shadow: transparent 0 0 1px;
+        color: #666;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Roboto,sans-serif;
+        margin: .4em;
+        padding: 1em;
+        position: relative;
+        text-decoration: none;
+        transform: perspective(1px) translateZ(0);
+        transition: color .5s;
+        vertical-align: middle;
+      }
+      
+.pointer {
+    cursor: pointer;
+}
+.profile {
+    background: rgb(90, 84, 92);
 }
 
-.bio_editor{
-    background:  rgb(241, 207, 255) ;
-
+.bio_editor {
+    background: rgb(241, 207, 255);
 }
 
-.other_profile{
-    background:  rgb(144, 231, 151) ;
+.other_profile {
+    background: rgb(144, 231, 151);
 }
 
-.show_bio{
-    background:  rgb(100, 114, 101) ;
+.show_bio {
+    background: rgb(100, 114, 101);
 }
 
-.find_people{
-    background:  rgb(158, 211, 221) ; 
+.find_people {
+    background: rgb(158, 211, 221);
 }
 
 /* for FindPeople */
 .users {
-    background:  rgb(187, 149, 231) ; 
-
+    background: rgb(187, 149, 231);
 }
 
-
-#no_results{
-    background:  rgb(228, 35, 77) ; 
+#no_results {
+    background: rgb(228, 35, 77);
 }
 
-.friend{
-
-    background:  rgb(117, 133, 64) ; 
-
+.friend {
+    background: rgb(117, 133, 64);
 }
 
-.friend img{
+.friend img {
     height: 100px;
     width: 100px;
     border-radius: 5%;
     object-fit: cover;
+}
 
+.wannabe {
+    background: rgb(94, 97, 85);
+}
+
+.all_users {
+    text-align: center;
+    background: rgb(94, 97, 85);
+    object-fit: cover;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.all_users img {
+    height: 180px;
+    width: 150px;
+    border-radius: 5%;
+    object-fit: cover;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.all_users img:hover {
 
 }
 
+.all_users_txt {
+    padding-bottom: 16px;
+    font-size: 12px;
+}
 
-.wannabe{
-    background:  rgb(94, 97, 85) ; 
-
+.all_users_h {
+    padding-bottom: 16px;
 }
 
 
-.all_users{
-    background:  rgb(94, 97, 85) ; 
+.chat {
+    background: rgb(117, 133, 64);
+}
+
+.chat-content{
+    background: rgb(92, 97, 75);
+}
+.chat_single{
+
+}
+#chat_name{
+
+}
+
+.chat_date-message_wrap{
+
+}
+
+.chat-message-date{
+
+}
+
+.chat-text{
+    
 }

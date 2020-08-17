@@ -1,39 +1,43 @@
 const express = require('express');
+const app = express();
 const compression = require('compression');
+const server = require('http').Server(app);
+const io = require('socket.io')(server, { origins: 'localhost:8080' });
 
-const cookieSession = require ('cookie-session');
+const db = require("./db.js");
+const cookieSession = require('cookie-session');
+
+
+
+//COOKIE SESSION Socket.io
+const cookieSessionMiddleware = cookieSession({
+    secret: "Life is a big enigma",
+    maxAge: 1000 * 60 * 60 * 24 * 14
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+
+
 const csurf = require('csurf');
 const apiRoutes = require('./api-routes.js');
 
-//const hashing = require('./passwords.js');
-//Socket.io 
-//const server etc
 
-
-
-
-
-
-const app = express();
 app.use('/static', express.static('static'));
 
 app.use(express.json());  
 
-//COOKIE SESSION
-app.use (cookieSession({
-    secret: "Life is a big enigma",
-    maxAge: 1000 * 60 * 60 * 24 * 7 //7 Tage 
-})
-);
 
 app.use(compression());
-app.use('/public', express.static('public'));
+app.use('/public', express.static('public'));//puplic is the upload folder
 app.use('/uploads', express.static('uploads'));//uploads is the static folder
 
-
+//CSRF security
 app.use(csurf());
 app.use(function(req, res, next){
-    res.cookie('mytoken', req.csrfToken());//axios
+    res.cookie('mytoken', req.csrfToken());
     next();
 });
 
@@ -68,7 +72,6 @@ app.get('/welcome', (request, response)=>{
 
 // LOGIN PAGE 
 
-
 app.get('*', (request, response)=>{
     if (request.session.userID) {
         response.sendFile(__dirname + '/index.html'); 
@@ -79,11 +82,84 @@ app.get('*', (request, response)=>{
 
 
 
+//Socket.io
+
+//conncect
+io.on('connection', async function (socket) {
+    //check if user is logged in (cookie session)
+    const userId = socket.request.session.userID;
+    const user = await db.getUser(userId);
+       
+    //disconnect if user is not logged in
+    if (!userId) {
+        return socket.disconnect(true);
+    }
+    //read messages 
 
 
 
+    socket.on('newMessage', (message) => {
+        
 
-app.listen(8080, function () {
+        return db.addMessage(userId, message).then(( rows ) => {
+            let newMessage = {
+                ...user,
+                chat_id: rows.id,
+                message_text: rows.message_text,
+                created_at: rows.created_at,
+                user_id: rows.user_id 
+                
+            };
+            console.log ("newMessage:", newMessage);  
+            io.sockets.emit('chatMessage', newMessage);
+            
+               
+        })
+            
+            .catch((error) => {
+                console.log("NEWMessageError__: ", error);
+            });
+        
+        
+    });
+    
+    
+   
+
+    //const lastMessages = await db.getLastMessages();
+
+
+    //Zuweisung 
+    //io.socket.emit('messages', lastMessages);
+
+    
+    let getLastMessages = async () => {
+        const rows = await db.getLastMessages();
+        
+        // for (let i = 0; i < rows.length; i++) {
+        //     let data = await db.getImage(rows.id);
+        //     rows[i].image = data.rows[0].image;
+        // }
+
+        let lastMessages = rows;
+        io.sockets.emit("chatMessages", lastMessages);
+        
+    };
+
+    getLastMessages();
+
+    
+        
+} 
+
+
+    /* ... */
+);
+
+
+//SERVER
+server.listen(8080, function () {
     console.log("I'm listening.");
 });
+
 

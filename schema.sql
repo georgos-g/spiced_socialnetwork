@@ -13,8 +13,7 @@ CREATE TABLE users
 );
 
 
-DROP TABLE IF EXISTS passwordresets
-;
+DROP TABLE IF EXISTS passwordresets;
 CREATE TABLE passwordresets
 (
     id SERIAL PRIMARY KEY,
@@ -24,8 +23,7 @@ CREATE TABLE passwordresets
 );
 
 
-DROP TABLE IF EXISTS friend_requests
-;
+DROP TABLE IF EXISTS friend_requests;
 CREATE TABLE friend_requests
 (
     id SERIAL PRIMARY KEY,
@@ -36,7 +34,7 @@ CREATE TABLE friend_requests
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
+DROP TABLE IF EXISTS chat_messages;
 CREATE TABLE chat_messages
 (
     id SERIAL PRIMARY KEY,
@@ -49,8 +47,13 @@ CREATE TABLE chat_messages
 INSERT INTO chat_messages 
 (user_id, message_text) 
 VALUES 
-(33, 'Hi'),
-(44, 'How are you???');
+(33, 'Hi secret friend'),
+(44, 'How are you???'),
+(55, 'booom booom booom'),
+(66, '...can someone tell a joke?'),
+(77, 'The world is flat as my belly (...not!)')
+
+
 
 INSERT INTO users
     (firstname, lastname, email, password_hash, profile_picture_url, bio)

@@ -37,7 +37,7 @@ exports.addImage = (profile_picture_url, id) => {
 
 exports.getImage = (id, profile_picture_url) => {
     return db
-        .query(`SELECT * FROM users WHERE id=$1, profile_picture_url = $2;`, [
+        .query(`SELECT * FROM users WHERE id=$1 AND profile_picture_url = $2;`, [
             id,
             profile_picture_url,
         ])
@@ -127,7 +127,8 @@ exports.findUsers = (firstname) => {
 //FRIEND BUTTON------------------------------------------
 
 //add
-exports.addFriendRequest = (from_id, to_id) => {///Check
+exports.addFriendRequest = (from_id, to_id) => {
+    ///Check
     return db
         .query(
             `INSERT INTO friend_requests 
@@ -153,8 +154,7 @@ exports.acceptFriendRequest = (from_id, to_id) => {
         .then((response) => response.rows[0]);
 };
 
-
-//delete & unfirend 
+//delete & unfirend
 exports.deleteFriendRequest = (from_id, to_id) => {
     return db
         .query(
@@ -169,7 +169,7 @@ exports.deleteFriendRequest = (from_id, to_id) => {
         .then((response) => response.rows[0]);
 };
 
-//get 
+//get
 exports.getFriendRequest = (userId1, userId2) => {
     return db
         .query(
@@ -182,7 +182,6 @@ exports.getFriendRequest = (userId1, userId2) => {
         )
         .then((response) => response.rows[0]);
 };
-
 
 exports.getFriendsAndWannabes = (userId) => {
     return db
@@ -200,8 +199,43 @@ exports.getFriendsAndWannabes = (userId) => {
 //All Users
 exports.getAllUsers = (userId) => {
     return db
-        .query(`SELECT * FROM users WHERE id !=$1  ORDER BY id DESC;`,
+        .query(
+            `SELECT * FROM users 
+            WHERE id !=$1  ORDER BY id DESC;`,
             [userId]
         )
         .then((response) => response.rows);
 };
+
+//Socket.io Chat
+exports.getLastMessages = () => {
+    
+    return db.query(
+        `SELECT * 
+        FROM (
+            SELECT 
+                chat_messages.id AS message_id, *
+            FROM
+                chat_messages
+            JOIN users
+                ON(chat_messages.user_id = users.id)
+            ORDER BY
+                chat_messages.id DESC
+            LIMIT 10
+         ) as subquery
+         ORDER BY message_id ASC;`
+    )
+        .then((response) => response.rows);
+};
+
+exports.addMessage = (user_id, message_text) => {
+    return db.query(
+        `INSERT INTO chat_messages 
+        (user_id, message_text) 
+        VALUES($1, $2) RETURNING *;`,
+        [user_id, message_text]
+
+    )
+        .then((response) => response.rows[0]);
+};
+
