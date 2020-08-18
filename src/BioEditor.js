@@ -30,7 +30,7 @@ export default class BioEditor extends React.Component {
         if (isEditing) {
             return (
                 <div className="bio_editor">
-                    <textarea
+                    <textarea className="bio_input_field" 
                         name="draft"
                         onChange={(e) => this.handleChange(e)}
                         value={draft || bio}
@@ -44,7 +44,7 @@ export default class BioEditor extends React.Component {
                 <div className="bio_editor">
                     {bio}
                     <a onClick={(e) => this.setState({ isEditing: true })}>
-                        {bio ? "edit" : "add bio"}
+                        {bio ? "edit Bio" : "add bio"}
                     </a>
                 </div>
             );

@@ -9,7 +9,6 @@ export default class OtherProfile extends React.Component {
         super(props);
         this.state = {
             itsSelf: false,
-           
         };
     }
 
@@ -18,7 +17,7 @@ export default class OtherProfile extends React.Component {
         //console.log("userId:", userId);
 
         axios
-            .get('/api/v1/user/' + userId)
+            .get("/api/v1/user/" + userId)
             .then(({ data }) => {
                 //console.log("This is the data: ", data);
                 if (data.itsSelf) {
@@ -33,7 +32,8 @@ export default class OtherProfile extends React.Component {
                     });
                 }
             })
-            .catch((error) => {//display Error
+            .catch((error) => {
+                //display Error
                 console.log("Error in axios.get /user: ", error);
             });
         //
@@ -43,21 +43,20 @@ export default class OtherProfile extends React.Component {
             return <div>...Loading</div>;
         }
         return (
-            <div className='other_profile'>
-                <h1>
-                    {this.state.firstname} {this.state.lastname}
-                </h1>
+            <div className="other_profile">
                 <ProfilePic
                     firstname={this.state.firstname}
                     lastname={this.state.lastname}
                     profilePic={this.state.profilePic}
                 />
-                <p className='show_bio'>{this.state.bio}</p>
+                <h1>
+                    {this.state.firstname} {this.state.lastname}
+                </h1>
+
+                <p className="show_bio">{this.state.bio}</p>
 
                 <FriendButton otherUserId={this.state.id} />
-
             </div>
         );
-        
     }
 }

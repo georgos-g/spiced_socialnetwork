@@ -63,7 +63,7 @@ export default class App extends React.Component {
                             }}
                         />
                     )}
-                    <h2>Hi {user.firstname}:-)</h2>
+                    <h2>Hi {user.firstname}</h2>
                     <p>Tell us a secret!</p>
 
                     <BrowserRouter>
