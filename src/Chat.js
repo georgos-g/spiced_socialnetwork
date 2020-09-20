@@ -19,7 +19,7 @@ export default function Chat() {
     console.log("chatMessages: ", chatMessages);
 
     return ( <div><div> <h2>The Secret Chat</h2></div>
-            <div className="chat">
+        <div className="chat">
            
             <div className="chat-content">
                 {chatMessages.map((message) => (

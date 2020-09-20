@@ -51,7 +51,7 @@ VALUES
 (44, 'How are you???'),
 (55, 'booom booom booom'),
 (66, '...can someone tell a joke?'),
-(77, 'The world is flat as my belly (...not!)')
+(77, 'The world is flat as my belly (...not!)');
 
 
 

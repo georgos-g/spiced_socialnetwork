@@ -117,7 +117,7 @@ io.on('connection', async function (socket) {
         })
             
             .catch((error) => {
-                //console.log("NEWMessageError__: ", error);
+                console.log("NEWMessageError__: ", error);
             });
         
         
@@ -136,11 +136,6 @@ io.on('connection', async function (socket) {
     let getLastMessages = async () => {
         const rows = await db.getLastMessages();
         
-        // for (let i = 0; i < rows.length; i++) {
-        //     let data = await db.getImage(rows.id);
-        //     rows[i].image = data.rows[0].image;
-        // }
-
         let lastMessages = rows;
         io.sockets.emit("chatMessages", lastMessages);
         
