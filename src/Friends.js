@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-//import ProfilePic from "./ProfilePic.js";
 import FriendButton from "./FriendButton.js";
 import FriendCmp from "./FriendCmp.js";
 
@@ -33,8 +32,7 @@ export default function Friends() {
             });
         }
     });
-    //console.log("wannabes", wannabes);
-    //console.log ("friends", friends);
+
     return (
         <div>
             <h2>Requests for Friendship </h2>

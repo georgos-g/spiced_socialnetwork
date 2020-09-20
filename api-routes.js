@@ -46,7 +46,7 @@ router.post("/api/v1/register", (request, response) => {
         });
 });
 
-///Route for login
+//Route for login
 
 router.post("/api/v1/login", (request, response) => {
     //check if fields are filled
@@ -171,8 +171,10 @@ const uploader = multer({
 });
 
 //upload files to AWS S3
-router.post("/api/v1/user/profile-upload",
-    uploader.single("file"),(request, response) => {
+router.post(
+    "/api/v1/user/profile-upload",
+    uploader.single("file"),
+    (request, response) => {
         //console.log ("request, response", request, response);
         const s3ImageURL = s3.generateBucketURL(request.file.filename);
         //console.log("s3ImageURL", s3ImageURL);
@@ -225,12 +227,9 @@ router.get("/api/v1/user/image/:id", (request, response) => {
 //Route to update bio
 router.post("/api/v1/user/bio", (request, response) => {
     const { bio } = request.body;
-    //console.log("request.body;", request.body);
-    //console.log ("request.session", request.session);
     db.updateBio(request.session.userID, bio)
 
         .then((result) => {
-            //console.log ('result', result);
             response.json({ success: true });
         })
         .catch((error) => {
@@ -242,15 +241,12 @@ router.post("/api/v1/user/bio", (request, response) => {
 //Other Profile
 router.get("/api/v1/user/:id", (request, response) => {
     const userID = request.session.userID;
-    //console.log("userID", userID);
 
     if (!userID) {
         return response.send({ success: false });
     } else {
-        //console.log("request.params.id", request.params.id);
         db.getUser(request.params.id)
             .then((user) => {
-                //console.log("user", user);
                 response.json(user);
             })
 
@@ -283,124 +279,127 @@ router.get("/api/v1/users/:query", (request, response) => {
     }
 });
 
-
-//Friend Requests Button-----------------------------------------
+//Friend Requests Button
 const NO_REQUEST = "no-request";
 const REQUEST_MADE_BY_YOU = "request-made-by-you";
 const REQUEST_MADE_TO_YOU = "request-made-to-you";
 const REQUEST_ACCEPTED = "request-accepted";
 
-router.get("/api/v1/friend-request/:other_user_id", async(request, response) => {
-    const { userID } = request.session;
-    const { other_user_id } = request.params;
-    const friendRequest = await db.getFriendRequest(userID, other_user_id);
-    
-    //console.log("friendRequest: ", friendRequest);  
-    
-    if (!friendRequest) {
-        return response.json({ status: NO_REQUEST});
+router.get(
+    "/api/v1/friend-request/:other_user_id",
+    async (request, response) => {
+        const { userID } = request.session;
+        const { other_user_id } = request.params;
+        const friendRequest = await db.getFriendRequest(userID, other_user_id);
+
+        if (!friendRequest) {
+            return response.json({ status: NO_REQUEST });
+        } else if (friendRequest.accepted) {
+            return response.json({ status: REQUEST_ACCEPTED });
+        } else if (friendRequest.to_id == userID) {
+            return response.json({ status: REQUEST_MADE_TO_YOU });
+        } else if (friendRequest.from_id == userID) {
+            return response.json({ status: REQUEST_MADE_BY_YOU });
+        }
     }
-    else if (friendRequest.accepted) {
-        return response.json({ status: REQUEST_ACCEPTED});
-    }
-    else if (friendRequest.to_id==userID) {
-        return response.json({ status: REQUEST_MADE_TO_YOU});
-    }
-    else if (friendRequest.from_id==userID) {
-        return response.json({ status: REQUEST_MADE_BY_YOU});
-    }
-}); 
+);
 //Make Request
-router.post("/api/v1/friend-request/make/:other_user_id", (request, response) => {
-    const { other_user_id } = request.params;
-    const { userID } = request.session;
+router.post(
+    "/api/v1/friend-request/make/:other_user_id",
+    (request, response) => {
+        const { other_user_id } = request.params;
+        const { userID } = request.session;
 
-    db.addFriendRequest(other_user_id, userID)
-        .then((other_user_id ) => {
-            response.json({
-                success: true,
-                status: REQUEST_MADE_BY_YOU
+        db.addFriendRequest(other_user_id, userID)
+            .then((other_user_id) => {
+                response.json({
+                    success: true,
+                    status: REQUEST_MADE_BY_YOU,
+                });
+            })
+            .catch((error) => {
+                response.status(500).json({
+                    success: false,
+                    error: error,
+                });
             });
-            //console.log ("other_user_id:", other_user_id);  
-            
-        })
-        .catch((error) => {
-            response.status(500).json({
-                success: false,
-                error: error,
-            });
-        });
-});
-
+    }
+);
 
 //Accept Request
-router.post("/api/v1/friend-request/accept/:other_user_id", (request, response) => {
-    const { other_user_id } = request.params;
-    const { userID } = request.session;
+router.post(
+    "/api/v1/friend-request/accept/:other_user_id",
+    (request, response) => {
+        const { other_user_id } = request.params;
+        const { userID } = request.session;
 
-    db.acceptFriendRequest(other_user_id, userID)
-        .then((other_user_id) => {
-            response.json({
-                success: true,
-                status: REQUEST_ACCEPTED
-            });             
-        })
-        .catch((error) => {
-            response.status(500).json({
-                success: false,
-                error: error,
+        db.acceptFriendRequest(other_user_id, userID)
+            .then((other_user_id) => {
+                response.json({
+                    success: true,
+                    status: REQUEST_ACCEPTED,
+                });
+            })
+            .catch((error) => {
+                response.status(500).json({
+                    success: false,
+                    error: error,
+                });
             });
-        });
-});
+    }
+);
 
 //Cancel Request
-router.post("/api/v1/friend-request/cancel/:other_user_id", (request, response) => {
-    const { other_user_id } = request.params;
-    const { userID } = request.session;
+router.post(
+    "/api/v1/friend-request/cancel/:other_user_id",
+    (request, response) => {
+        const { other_user_id } = request.params;
+        const { userID } = request.session;
 
-    db.deleteFriendRequest(other_user_id, userID)
-        .then((other_user_id) => {
-            response.json({
-                success: true,
-                status: REQUEST_ACCEPTED
-            });             
-        })
-        .catch((error) => {
-            response.status(500).json({
-                success: false,
-                error: error,
+        db.deleteFriendRequest(other_user_id, userID)
+            .then((other_user_id) => {
+                response.json({
+                    success: true,
+                    status: REQUEST_ACCEPTED,
+                });
+            })
+            .catch((error) => {
+                response.status(500).json({
+                    success: false,
+                    error: error,
+                });
             });
-        });
-});
-
+    }
+);
 
 //Unfriend Request
-router.post("/api/v1/friend-request/unfriend/:other_user_id", (request, response) => {
-    const { other_user_id } = request.params;
-    const { userID } = request.session;
+router.post(
+    "/api/v1/friend-request/unfriend/:other_user_id",
+    (request, response) => {
+        const { other_user_id } = request.params;
+        const { userID } = request.session;
 
-    db.deleteFriendRequest(other_user_id, userID)
-        .then((other_user_id) => {
-            response.json({
-                success: true,
-                status: NO_REQUEST
-            });             
-        })
-        .catch((error) => {
-            response.status(500).json({
-                success: false,
-                error: error,
+        db.deleteFriendRequest(other_user_id, userID)
+            .then((other_user_id) => {
+                response.json({
+                    success: true,
+                    status: NO_REQUEST,
+                });
+            })
+            .catch((error) => {
+                response.status(500).json({
+                    success: false,
+                    error: error,
+                });
             });
-        });
-});
+    }
+);
 
 //Redux
 router.get("/api/v1/friends_and_wannabes", (request, response) => {
-   
     db.getFriendsAndWannabes(request.session.userID)
         .then((friends) => {
-            //console.log("friends", friends);
-            response.json({ success: true, friends });           
+            response.json({ success: true, friends });
         })
 
         .catch((error) => {
@@ -409,16 +408,12 @@ router.get("/api/v1/friends_and_wannabes", (request, response) => {
                 error: error,
             });
         });
-    
 });
-
 
 //show all users
 router.get("/api/v1/all-users", (request, response) => {
-    
     db.getAllUsers(request.session.userID)
         .then((users) => {
-            //console.log("users", users);  
             response.json({ success: true, users });
         })
         .catch((error) => {
@@ -427,9 +422,6 @@ router.get("/api/v1/all-users", (request, response) => {
                 error: error,
             });
         });
-    
 });
-
-
 
 module.exports = router;
