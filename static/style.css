@@ -1,0 +1,376 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,400i,700,700i");
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(121, 128, 133);
+    border-radius: 4;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(187, 190, 191);
+}
+::-webkit-scrollbar-track {
+    background-color: rgb(58, 58, 58);
+}
+
+body {
+    background: #8f8f80;;
+    color: white;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    text-align: center;
+    height: 100%;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+a {
+    font-weight: 500;
+    color: rgb(22, 22, 22);
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p > a {
+    border-bottom: 0px solid rgba(44, 170, 223, 0);
+}
+
+p > a:visited {
+    color: none;
+    text-decoration: none;
+}
+
+p > a:visited:hover,
+p > a:visited:focus {
+    color: none;
+    text-decoration: none;
+}
+
+p > a:hover,
+p > a:focus {
+    color: none;
+    border-bottom: 0px solid #2caadf;
+}
+
+.center {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.profile img{
+
+height: 150px;
+width: 100px;
+border-radius: 5%;
+right: 15px;
+top: 10px;
+object-fit: cover;
+
+}
+
+
+
+#profile_pic {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    right: 15px;
+    top: 10px;
+    
+}
+
+#profile_pic img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+.profile {
+    padding:5px;
+    background:  #5e6155;
+}
+.profile img  {
+    height: 100px;
+    width: 100px;}
+
+.other_profile #profile_pic{
+    position: static;
+    float: left;
+}
+
+.other_profile #profile_pic img{
+    
+    width: 140px;
+    height: 200px;
+    border-radius: 3%;
+    object-fit: cover;
+    position: relative;
+    
+    
+}
+.other_profile {
+    min-height: 200px;
+    padding: 5px;
+    background:  #5e6155;
+}
+
+
+
+.login {
+    background: #6f706c;;
+}
+
+.reset_password {
+    background:  #5e6155;
+}
+
+.register {
+    background: #5e6155;
+}
+
+.error {
+    background: rgb(230, 128, 191);
+}
+
+.welcome {
+    margin-top: 10px;
+    background:  #8f8f80;
+}
+
+.wellcome_image img{
+    width: 600px;
+    height: 300px;
+    border-radius: 0%;
+    object-fit: cover;
+    
+}
+.user {
+    background: #8f8f80;
+}
+
+
+.pic_placeholder {
+    background:  #5e6155;
+}
+
+#uploader {
+    position: absolute;
+    border-radius: 5px;
+    width: 500px;
+    height: 90px;
+    background: rgb(20, 20, 20, 0.8);
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.uploader_content {
+    position: absolute;
+    margin: 5px;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.close_button {
+    font-size: 19px;
+    position: absolute;
+    top: 3px;
+    right: 11px;
+    cursor: pointer;
+}
+button {
+    margin: 10px;
+    cursor: pointer;
+}
+
+
+.pointer {
+    cursor: pointer;
+}
+
+.bio_editor {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background:  #5e6155;
+}
+
+
+.bio_input_field{
+        
+    margin-top: 10px;
+    width: 300px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+
+
+
+.show_bio {
+    background:  #5e6155;
+}
+
+.find_people {
+    padding: 5px;
+    background:  #5e6155;
+}
+
+/* for FindPeople */
+.users {
+    background:  #c0c0c0;;
+}
+
+#no_results {
+    background:  #5e6155;
+}
+
+.friend {
+    margin: auto;
+    padding: 10px;
+    max-width: 800px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #5e6155;
+}
+
+.friend_data {
+    padding-top: 0px;
+    padding-left: 10px;
+    text-align: left;
+    width: 600px;
+    
+}
+.friend img {
+    height: 160px;
+    width: 120px;
+    border-radius: 5%;
+    object-fit: cover;
+}
+
+
+.wannabe {
+    background: #5e6155;
+}
+
+.all_users {
+    padding-top: 20px;
+    text-align: center;
+    background: #5e6155;;
+    object-fit: cover;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.all_users img {
+    height: 180px;
+    width: 150px;
+    border-radius: 5%;
+    object-fit: cover;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.all_users img:hover {
+}
+
+.all_users_txt {
+    padding-bottom: 16px;
+    font-size: 12px;
+}
+
+.all_users_h {
+    padding-bottom: 16px;
+}
+
+.chat {
+    padding: 20px;
+
+    background: rgb(74, 75, 70);
+  
+}
+
+.chat-content {
+    margin: auto;
+    padding:10px;
+    max-width: 800px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 4px;
+    background: rgb(102, 104, 99);
+}
+.chat_single {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    background: rgba(207, 207, 207, 0.4); 
+    padding: 10px;
+    width: 360px;
+    margin: 10px;
+    clear: both;
+    border-radius: 5px;
+   
+
+
+}
+.chat_single img {
+    
+    height: 120px;
+    width: 110px;
+    border-radius: 5%;
+    object-fit: cover;
+   
+}
+#chat_name {
+    align: left;
+    font-size:13px
+}
+
+.chat_date-message_wrap {
+    width: 400px;
+}
+
+
+
+.chat-text { 
+    padding-left: 10px;
+    padding-right: 6px ;
+    width: 260px;
+    word-break: break-all;
+}
+
+.chat_input_field{
+    margin-top: 10px;
+    width: 300px;
+    height: 40px;
+    margin-bottom: 8px;
+}
+
