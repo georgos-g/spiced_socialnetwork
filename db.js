@@ -26,7 +26,7 @@ exports.addPasswordReset = (email, code) => {
 //Images----------------------
 
 exports.addImage = (profile_picture_url, id) => {
-    //console.log("profile_picture_url, id", profile_picture_url, id);
+    
     return db
         .query(
             `UPDATE users SET profile_picture_url=$1 WHERE id=$2 RETURNING *;`,
