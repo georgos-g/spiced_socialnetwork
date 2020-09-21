@@ -26,7 +26,7 @@ export default class App extends React.Component {
         axios.get("/api/v1/me").then((response) => {
             this.setState({ user: response.data });
         });
-        //console.log("I am here...Me ");
+        
     }
     render() {
         const { user, uploaderVisible } = this.state;

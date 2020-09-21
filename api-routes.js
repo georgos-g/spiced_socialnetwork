@@ -140,7 +140,6 @@ router.get("/api/v1/me", (request, response) => {
         db.getUser(userID)
 
             .then((user) => {
-                //console.log("user", user);
                 delete user.password_hash;
                 response.json(user);
             })
@@ -175,9 +174,8 @@ router.post(
     "/api/v1/user/profile-upload",
     uploader.single("file"),
     (request, response) => {
-        //console.log ("request, response", request, response);
         const s3ImageURL = s3.generateBucketURL(request.file.filename);
-        //console.log("s3ImageURL", s3ImageURL);
+
         s3.uploadFile(request.file)
 
             .then(() => {
@@ -191,8 +189,6 @@ router.post(
             })
 
             .then((resultFromDb) => {
-                //console.log("resultFromDb", resultFromDb);
-
                 response.json({
                     success: true,
                     //fileURL: s3ImageURL,
