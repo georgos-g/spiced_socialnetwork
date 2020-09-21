@@ -119,8 +119,7 @@ exports.findUsers = (firstname) => {
         .then((response) => response.rows);
 };
 
-//FRIEND BUTTON------------------------------------------
-
+//FRIEND BUTTON
 //add
 exports.addFriendRequest = (from_id, to_id) => {
     //Check
