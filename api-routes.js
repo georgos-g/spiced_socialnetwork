@@ -223,7 +223,6 @@ router.get("/api/v1/user/image/:id", (request, response) => {
 //Route to update bio
 router.post("/api/v1/user/bio", (request, response) => {
     const { bio } = request.body;
-
     db.updateBio(request.session.userID, bio)
 
         .then((result) => {
