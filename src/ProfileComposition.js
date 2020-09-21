@@ -5,10 +5,7 @@ export default function ProfileComposition(props) {
     return (<div className='profile'>
         {profilePic}
         <h3>{firstname} {lastname}</h3>
-        {bioEditor}
-        
+        {bioEditor}        
     </div>
-
     );
-
 }

@@ -6,7 +6,7 @@ import axios from './axios.js';
 
 export default class PasswordReset extends React.Component { 
 
-    constructor() {//
+    constructor() {
         super();
         this.state = {
             step: 1,
@@ -73,7 +73,7 @@ export default class PasswordReset extends React.Component {
                 </div>
     
             );
-        }//state.step === 1
+        }
         
             
         if (this.state.step == 2) {
@@ -102,10 +102,8 @@ export default class PasswordReset extends React.Component {
                     </button> 
                 </div>            
             );
-        }
-    
-
-        
+        }  
+       
         if (this.state.step == 3) {
             return (
                 <div className='reset_password'>Operation Successful! 
@@ -117,7 +115,7 @@ export default class PasswordReset extends React.Component {
             
         
     
-    }//Render
+    }
 
 
 }

@@ -46,7 +46,7 @@ router.post("/api/v1/register", (request, response) => {
         });
 });
 
-///Route for login
+//Route for login
 
 router.post("/api/v1/login", (request, response) => {
     //check if fields are filled
@@ -140,6 +140,7 @@ router.get("/api/v1/me", (request, response) => {
         db.getUser(userID)
 
             .then((user) => {
+                //console.log("user", user);
                 delete user.password_hash;
                 response.json(user);
             })
@@ -174,8 +175,9 @@ router.post(
     "/api/v1/user/profile-upload",
     uploader.single("file"),
     (request, response) => {
+        //console.log ("request, response", request, response);
         const s3ImageURL = s3.generateBucketURL(request.file.filename);
-
+        //console.log("s3ImageURL", s3ImageURL);
         s3.uploadFile(request.file)
 
             .then(() => {
@@ -189,6 +191,8 @@ router.post(
             })
 
             .then((resultFromDb) => {
+                //console.log("resultFromDb", resultFromDb);
+
                 response.json({
                     success: true,
                     //fileURL: s3ImageURL,
@@ -275,7 +279,7 @@ router.get("/api/v1/users/:query", (request, response) => {
     }
 });
 
-//Friend Requests Button-----------------------------------------
+//Friend Requests Button
 const NO_REQUEST = "no-request";
 const REQUEST_MADE_BY_YOU = "request-made-by-you";
 const REQUEST_MADE_TO_YOU = "request-made-to-you";

@@ -15,7 +15,7 @@ export const init = (store) => {
 
         socket.on("chatMessage", (message) => {
             store.dispatch(chatMessage(message));
-            console.log("Redux-Message: ", message);
+            //console.log("Redux-Message: ", message);
         });
             
         

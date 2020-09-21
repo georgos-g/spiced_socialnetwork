@@ -14,11 +14,13 @@ export default function AllUsers() {
             const { data } = await axios.get("/api/v1/all-users");
 
             setUsers(data.users);
+            //console.log("DATA:", data);
         }
 
         getData();
     }, []);
 
+    //console.log ("users", users);
     return (
         <div className="all_users_h">
             <h2>All the Secret People </h2>

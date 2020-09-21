@@ -1,10 +1,8 @@
 import React from "react";
 import axios from "./axios.js";
 import { BrowserRouter, Route, Link } from "react-router-dom";
-
 import ProfilePic from "./ProfilePic.js";
 import ProfileComposition from "./ProfileComposition.js";
-//import Profile from "./Profile.js";
 import BioEditor from "./BioEditor.js";
 import Uploader from "./Uploader.js";
 import OtherProfile from "./OtherProfile.js";
@@ -28,7 +26,7 @@ export default class App extends React.Component {
         axios.get("/api/v1/me").then((response) => {
             this.setState({ user: response.data });
         });
-       
+        //console.log("I am here...Me ");
     }
     render() {
         const { user, uploaderVisible } = this.state;

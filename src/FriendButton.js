@@ -54,10 +54,10 @@ export default function FriendButton(props) {
             </button>
         );
     } else {
-        return <div> Oops something went wrong!!!</div>;
+        return <div> Ooops something went wrong!!!</div>;
     }
 
-    //----------------------------
+    
 
     function button(action) {
         const dispatch = useDispatch();
@@ -72,6 +72,6 @@ export default function FriendButton(props) {
 
 
     button(); 
-    //----------------------------
+    
 
 }

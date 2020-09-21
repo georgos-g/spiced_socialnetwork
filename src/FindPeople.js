@@ -4,16 +4,16 @@ import ProfilePic from "./ProfilePic.js";
 import { Link } from "react-router-dom";
 
 export default function FindPeople() {
-    //hooks
+    // hooks
     const [users, setUsers] = useState([]);
     const [query, setQuery] = useState("");
 
-    // Ajax Call Hook
+    // ajax call hook
     useEffect(() => {
         let unnecessary;
         async function getData() {
             const { data } = await axios.get("/api/v1/users/" + query);
-            //Unnecessary Ajax calls
+            // unnecessary ajax calls
 
             if (!unnecessary) {
                 setUsers(data);

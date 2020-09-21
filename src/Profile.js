@@ -10,7 +10,7 @@ export default function Profile({
 }) {
     return (
         <div className="profile">
-            <div className='wellcome_image'>
+             <div className='wellcome_image'>
                 <img src="./static/lovehoney.jpg" alt=""/>
             </div>
             <h2>My Profile</h2>

@@ -1,5 +1,6 @@
 import axios from "./axios.js";
 
+
 export async function loadFriendsList() {
     const { data } = await axios.get("/api/v1/friends_and_wannabes");
     return {
@@ -49,3 +50,7 @@ export async function removeFriend(id) {
         id: id,
     };
 }
+
+
+
+

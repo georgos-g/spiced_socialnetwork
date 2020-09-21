@@ -36,7 +36,7 @@ export default class OtherProfile extends React.Component {
                 //display Error
                 console.log("Error in axios.get /user: ", error);
             });
-        //
+        
     }
     render() {
         if (!this.state.id) {

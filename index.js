@@ -96,21 +96,21 @@ io.on(
                         created_at: rows.created_at,
                         user_id: rows.user_id,
                     };
-                    
+
                     io.sockets.emit("chatMessage", newMessage);
                 })
 
                 .catch((error) => {
-                   
+                    console.log("NEWMessageError__: ", error);
                 });
         });
 
-        
+        //Zuweisung
+        //io.socket.emit('messages', lastMessages);
 
         let getLastMessages = async () => {
             const rows = await db.getLastMessages();
 
-         
             let lastMessages = rows;
             io.sockets.emit("chatMessages", lastMessages);
         };
@@ -118,6 +118,7 @@ io.on(
         getLastMessages();
     }
 
+    /* ... */
 );
 
 //SERVER

@@ -1,6 +1,5 @@
-
 let initialState = {
-    chatMessages:[]
+    chatMessages: [],
 };
 export default function (state = initialState, action) {
     if (action.type == "LOAD_FRIENDS_LIST") {
@@ -23,17 +22,11 @@ export default function (state = initialState, action) {
         });
     }
 
-
-    // zu bearbeiten
     if (action.type == "CANCEL_REQUEST") {
         state = {
             ...state,
-            
         };
     }
-    //-------------
-   
-
 
     if (action.type == "GET_LAST_MESSAGES") {
         state = {
@@ -45,10 +38,9 @@ export default function (state = initialState, action) {
     if (action.type == "GET_MESSAGE") {
         state = {
             ...state,
-            chatMessages: [...state.chatMessages, action.message]
+            chatMessages: [...state.chatMessages, action.message],
         };
     }
-
 
     return state;
 }

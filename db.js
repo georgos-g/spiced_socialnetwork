@@ -26,6 +26,7 @@ exports.addPasswordReset = (email, code) => {
 //Images----------------------
 
 exports.addImage = (profile_picture_url, id) => {
+    //console.log("profile_picture_url, id", profile_picture_url, id);
     return db
         .query(
             `UPDATE users SET profile_picture_url=$1 WHERE id=$2 RETURNING *;`,
@@ -120,9 +121,10 @@ exports.findUsers = (firstname) => {
 };
 
 //FRIEND BUTTON
+
 //add
 exports.addFriendRequest = (from_id, to_id) => {
-    //Check
+    //check
     return db
         .query(
             `INSERT INTO friend_requests 
