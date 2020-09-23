@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios.js";
-import ProfilePic from "./ProfilePic.js";
 import { Link } from "react-router-dom";
 
 export default function AllUsers() {

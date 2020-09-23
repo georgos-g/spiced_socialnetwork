@@ -1,8 +1,4 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import FriendButton from "./FriendButton.js";
-import { unFriend, acceptRequest } from "./actions.js";
+import React from "react";
 
 export default function FriendCmp(props) {
     const { firstname, lastname, profilePic, bio } = props;
@@ -13,11 +9,6 @@ export default function FriendCmp(props) {
                 {firstname} {lastname}
             </h3>
             <p>{bio}</p>
-
-            {/* <FriendButton
-            otherUserId={props.id}
-            onClick={(e) => dispatch(acceptRequest(props.id))}
-        /> */}
         </div>
     );
 }

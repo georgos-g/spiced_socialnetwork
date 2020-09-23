@@ -23,7 +23,7 @@ exports.addPasswordReset = (email, code) => {
         .then((response) => response.rows[0]);
 };
 
-//Images----------------------
+//Images
 
 exports.addImage = (profile_picture_url, id) => {
     return db
@@ -149,7 +149,7 @@ exports.acceptFriendRequest = (from_id, to_id) => {
         .then((response) => response.rows[0]);
 };
 
-//delete & unfirend
+//delete & unfriend
 exports.deleteFriendRequest = (from_id, to_id) => {
     return db
         .query(

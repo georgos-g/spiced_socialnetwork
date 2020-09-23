@@ -11,8 +11,6 @@ import Friends from "./Friends.js";
 import AllUsers from "./AllUsers.js";
 import Chat from "./Chat.js";
 
-
-
 export default class App extends React.Component {
     constructor() {
         super();
@@ -26,7 +24,6 @@ export default class App extends React.Component {
         axios.get("/api/v1/me").then((response) => {
             this.setState({ user: response.data });
         });
-        
     }
     render() {
         const { user, uploaderVisible } = this.state;
@@ -65,11 +62,11 @@ export default class App extends React.Component {
                     <p>Tell us a secret!</p>
 
                     <BrowserRouter>
-                        <nav >
+                        <nav>
                             <Link to="/">MySelf </Link> --
                             <Link to="/users"> Find Others </Link> --
                             <Link to="/friends"> Friends </Link> --
-                            <Link to="/all-users"> All User </Link> -- 
+                            <Link to="/all-users"> All User </Link> --
                             <Link to="/chat"> Chat </Link>
                         </nav>
                         <Route
@@ -80,18 +77,7 @@ export default class App extends React.Component {
                                     firstname={user.firstname}
                                     lastname={user.lastname}
                                     profilePic={
-                                        <ProfilePic
-                                            firstname={user.firstname}
-                                            lastname={user.lastname}
-                                            profilePic={
-                                                user.profile_picture_url
-                                            }
-                                            clickHandler={(e) =>
-                                                this.setState({
-                                                    uploaderVisible: true,
-                                                })
-                                            }
-                                        />
+                                        <img src={user.profile_picture_url} />
                                     }
                                     bioEditor={
                                         <BioEditor

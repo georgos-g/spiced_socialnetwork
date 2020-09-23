@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+
 
 export default function WannabeCmp(props) {
     const { firstname, lastname, profilePic, bio} = props;

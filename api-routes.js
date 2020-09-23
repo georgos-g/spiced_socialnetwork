@@ -12,14 +12,6 @@ const s3 = require("./s3.js");
 const uidSafe = require("uid-safe");
 const path = require("path");
 
-// //COOKIE SESSION
-// const cookieSession = require("cookie-session");
-// router.use(
-//     cookieSession({
-//         secret: "Life is a big enigma",
-//         maxAge: 1000 * 60 * 60 * 24 * 14
-//     })
-// );
 
 router.post("/api/v1/register", (request, response) => {
     const { firstname, lastname, email, password } = request.body;

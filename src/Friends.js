@@ -59,18 +59,20 @@ function Friend(props) {
     return (
         <div className="friend">
             <img src={props.profile_picture_url} />
-            <div className='friend_data'>
+            <div className="friend_data">
                 <FriendCmp
                     firstname={props.firstname}
                     lastname={props.lastname}
                     bio={props.bio}
                 />
                 <Link to={"/user/" + props.id}>Look at the Profile</Link>
-
-                <FriendButton
-                    otherUserId={props.id}
-                    onClick={(e) => dispatch(unFriend(props.id))}
-                />
+                <br />
+                <div className='button'>
+                    <FriendButton
+                        otherUserId={props.id}
+                        onClick={(e) => dispatch(unFriend(props.id))}
+                    />
+                </div>
             </div>
         </div>
     );

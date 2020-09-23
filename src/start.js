@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 import reducer from "./reducer.js";
-import Friends from "./Friends.js";
 
 import Welcome from "./Welcome.js";
 import App from "./App.js";
