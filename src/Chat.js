@@ -28,16 +28,18 @@ export default function Chat() {
                     {chatMessages.map((message) => (
                         <div key={message.chats_id} className="chat_single">
                             <Link to={"/user/" + message.user_id}>
-                                <div>
+                                <div className='chat_photo_text'>
+                                    
+                                    {" "}
                                     <img src={message.profile_picture_url} />
-
-                                    <div id="chat_name">
-                                        {message.firstname} {message.lastname}
-                                    </div>
+                                    {message.firstname} {message.lastname}
                                 </div>
                             </Link>
 
                             {/* <div className='chat-message-date'>{message.created_at}</div> */}
+                            <div id="chat_name">
+                                {/* {message.firstname} {message.lastname} */}
+                            </div>
                             <div className="chat-text">
                                 {message.message_text}
                             </div>
@@ -53,5 +55,4 @@ export default function Chat() {
             </div>
         </div>
     );
-    
 }

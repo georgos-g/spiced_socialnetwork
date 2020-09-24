@@ -30,6 +30,9 @@ export default function FindPeople() {
     return (
         <div className="find_people">
             <h2>Find other secret keepers... </h2>
+            <div className="wellcome_image">
+                <img src="./static/lovehoney.jpg" alt="" />
+            </div>
             <input
                 onChange={(e) => {
                     setQuery(e.target.value);

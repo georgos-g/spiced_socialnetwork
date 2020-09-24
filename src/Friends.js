@@ -63,7 +63,7 @@ function Friend(props) {
                 <FriendCmp
                     firstname={props.firstname}
                     lastname={props.lastname}
-                    bio={props.bio}
+                    // bio={props.bio}
                 />
                 <Link to={"/user/" + props.id}>Look at the Profile</Link>
                 <br />

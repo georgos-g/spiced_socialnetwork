@@ -15,7 +15,7 @@ export default class ProfilePic extends React.Component {
 
             return (
                 <div id='profile_pic' className='pic_placeholder' onClick={clickHandler}>
-                    <img src='./static/mops.jpg'/>
+                    <img src='./static/secret.jpg'/>
                 </div>
             );
         } else {
