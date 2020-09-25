@@ -8,8 +8,8 @@ export default function Profile({
 }) {
     return (
         <div className="profile">
-            <div className="wellcome_image">
-                <img src="./static/lovehoney.jpg" alt="" />
+            <div className="welcome_image">
+                <img src="./static/secret_2.jpg" alt="" />
             </div>
             <div className="friend_data">
                 <h2>My Profile</h2>

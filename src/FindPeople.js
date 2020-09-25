@@ -28,32 +28,34 @@ export default function FindPeople() {
     }, [query]);
 
     return (
-        <div className="find_people">
-            <h2>Find other secret keepers... </h2>
-            <div className="wellcome_image">
-                <img src="./static/lovehoney.jpg" alt="" />
-            </div>
-            <input
-                onChange={(e) => {
-                    setQuery(e.target.value);
-                }}
-            />
-            <div className="users">
-                {users.map((user) => (
-                    <div key={user.id}>
-                        <Link to={"/user/" + user.id}>
-                            <ProfilePic
-                                firstname={user.firstname}
-                                lastname={user.lastname}
-                                profilePic={user.profilePic}
-                            />
-                            <div>
-                                {user.firstname} {user.lastname}
-                            </div>
-                        </Link>
-                    </div>
-                ))}
-                {!users.length && <div id="no_results">No Results</div>}
+        <div><h2>Find other secret keepers... </h2>
+            <div className="find_people">
+                
+                <div className="welcome_image">
+                    <img src="./static/secret_2.jpg" alt="" />
+                </div>
+                <input
+                    onChange={(e) => {
+                        setQuery(e.target.value);
+                    }}
+                />
+                <div className="users">
+                    {users.map((user) => (
+                        <div key={user.id}>
+                            <Link to={"/user/" + user.id}>
+                                <ProfilePic
+                                    firstname={user.firstname}
+                                    lastname={user.lastname}
+                                    profilePic={user.profilePic}
+                                />
+                                <div>
+                                    {user.firstname} {user.lastname}
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                    {!users.length && <div id="no_results">No Results</div>}
+                </div>
             </div>
         </div>
     );

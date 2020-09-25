@@ -59,7 +59,8 @@ export default class App extends React.Component {
                         />
                     )}
                     <h2>Hi {user.firstname}</h2>
-                    <p>Tell us a secret!</p>
+                    <p>TELL US OUR SECRET!</p>
+
 
                     <BrowserRouter>
                         <nav>
@@ -69,6 +70,9 @@ export default class App extends React.Component {
                             <Link to="/all-users"> All User </Link> --
                             <Link to="/chat"> Chat </Link>
                         </nav>
+                        
+                            
+
                         <Route
                             exact
                             path="/"
@@ -113,6 +117,7 @@ export default class App extends React.Component {
 
                         <Route component={Chat} path="/chat/" />
                     </BrowserRouter>
+                    
                 </div>
             );
         }

@@ -28,23 +28,21 @@ export default function Chat() {
                     {chatMessages.map((message) => (
                         <div key={message.chats_id} className="chat_single">
                             <Link to={"/user/" + message.user_id}>
-                                <div className='chat_photo_text'>
-                                    
-                                    {" "}
+                                <div className="chat_photo_text">
+                                    <div id="chat_name">
+                                        {message.firstname} {message.lastname}
+                                    </div>
                                     <img src={message.profile_picture_url} />
-                                    {message.firstname} {message.lastname}
+                                    <br />{" "}
                                 </div>
                             </Link>
 
-                            {/* <div className='chat-message-date'>{message.created_at}</div> */}
-                            <div id="chat_name">
-                                {/* {message.firstname} {message.lastname} */}
-                            </div>
                             <div className="chat-text">
                                 {message.message_text}
                             </div>
                         </div>
                     ))}
+                    <br/>
 
                     <textarea
                         className="chat_input_field"

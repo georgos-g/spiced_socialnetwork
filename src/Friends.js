@@ -34,22 +34,26 @@ export default function Friends() {
     });
 
     return (
-        <div>
-            <h2>Requests for Friendship </h2>
-            {wannabes.length > 0 &&
-                wannabes.map((friend) => (
-                    <Friend key={friend.id} {...friend} />
-                ))}
+        <div><h2>Friend Status </h2>
+            <div className="friends">
+                <h2>Requests for Friendship </h2>
+                {wannabes.length > 0 &&
+                    wannabes.map((friend) => (
+                        <Friend key={friend.id} {...friend} />
+                    ))}
 
-            {wannabes.length == 0 && (
-                <div>You have no friendship request yet...</div>
-            )}
+                {wannabes.length == 0 && (
+                    <div>You have no friendship request yet...</div>
+                )}
 
-            <h2>Secret Friends </h2>
-            {friends.length > 0 &&
-                friends.map((friend) => <Friend key={friend.id} {...friend} />)}
+                <h2>Secret Friends </h2>
+                {friends.length > 0 &&
+                    friends.map((friend) => (
+                        <Friend key={friend.id} {...friend} />
+                    ))}
 
-            {friends.length == 0 && <div>No friends around...</div>}
+                {friends.length == 0 && <div>No friends around...</div>}
+            </div>
         </div>
     );
 }
@@ -58,7 +62,11 @@ function Friend(props) {
     const dispatch = useDispatch();
     return (
         <div className="friend">
-            <img src={props.profile_picture_url} />
+            {" "}
+            <Link to={"/user/" + props.id}>
+                {" "}
+                <img src={props.profile_picture_url} />
+            </Link>
             <div className="friend_data">
                 <FriendCmp
                     firstname={props.firstname}
@@ -67,7 +75,7 @@ function Friend(props) {
                 />
                 <Link to={"/user/" + props.id}>Look at the Profile</Link>
                 <br />
-                <div className='button'>
+                <div className="button">
                     <FriendButton
                         otherUserId={props.id}
                         onClick={(e) => dispatch(unFriend(props.id))}

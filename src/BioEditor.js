@@ -44,7 +44,7 @@ export default class BioEditor extends React.Component {
                 <div className="bio_editor">
                     {bio}
                     <a onClick={(e) => this.setState({ isEditing: true })}>
-                        {bio ? "edit Bio" : "add bio"}
+                        {bio ? "Edit your Bio" : "add bio"}
                     </a>
                 </div>
             );
