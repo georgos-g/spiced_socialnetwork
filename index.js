@@ -26,7 +26,7 @@ app.use("/static", express.static("static"));
 app.use(express.json());
 
 app.use(compression());
-app.use("/public", express.static("public")); //puplic is the upload folder
+app.use("/public", express.static("public")); //public is the upload folder
 app.use("/uploads", express.static("uploads")); //uploads is the static folder
 
 //CSRF security
@@ -71,7 +71,7 @@ app.get("*", (request, response) => {
 
 //Socket.io
 
-//conncect
+//connect
 io.on(
     "connection",
     async function (socket) {

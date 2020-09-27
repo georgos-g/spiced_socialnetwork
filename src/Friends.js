@@ -34,7 +34,8 @@ export default function Friends() {
     });
 
     return (
-        <div><h2>Friend Status </h2>
+        <div>
+            <h2>Friend Status </h2>
             <div className="friends">
                 <h2>Requests for Friendship </h2>
                 {wannabes.length > 0 &&

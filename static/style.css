@@ -1,8 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,400i,700,700i");
-html,
-body {
-    height: 100%;
-}
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -40,7 +36,7 @@ h3 {
 
 a {
     font-weight: 500;
-    color: rgb(0, 0, 0);
+    color: rgb(128, 128, 128);
     text-decoration: none;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
@@ -89,8 +85,8 @@ nav {
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    right: 15px;
-    top: 10px;
+    right: 20px;
+    top: 20px;
 }
 
 #profile_pic img {
@@ -100,8 +96,18 @@ nav {
     object-fit: cover;
     cursor: pointer;
 }
+
+.my_self{
+    
+    max-width: 1200px;
+    min-width: 444px;
+    padding: 20px;
+    border-radius: 5px;
+    background: rgb(51, 51, 51);
+   
+}
 .profile {
-    margin: auto;
+
     max-width: 800px;
     padding-right: 10px;
     background: #4b4b4b;
@@ -109,6 +115,9 @@ nav {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .profile img {
@@ -135,7 +144,13 @@ nav {
     margin: 0;
     width: 99px;
 }
+.other_profile_top {
+    height: 230px;
+background: rgb(51, 51, 51);
+padding: 10px;
+border-radius: 5px;
 
+}
 .other_profile {
     position: relative;
     margin: auto;
@@ -146,7 +161,7 @@ nav {
     flex-direction: row;
     flex-wrap: wrap;
     border-radius: 5px;
-    background: rgb(51, 51, 51);
+    background:#4b4b4b;
 }
 
 .other_profile_data {
@@ -187,20 +202,26 @@ nav {
     background: rgb(51, 51, 51);
     border-radius: 5px;
     padding-bottom: 20px;
+    margin-top: 20px;
 }
 
 .reset_password {
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+
     background: rgb(51, 51, 51);
 }
 
 .register {
-    background: rgb(65, 64, 64);
+    background: rgb(51, 51, 51);
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    margin-top: 10px;
+    margin-top: 20px;
     border-radius: 5px;
 }
 
@@ -216,7 +237,7 @@ nav {
 .welcome {
     margin: auto;
     background: #4b4b4b;
-    max-width: 800px;
+    max-width: 1200px;
 }
 
 .welcome_image img {
@@ -230,12 +251,11 @@ nav {
 .welcome_image {
     margin: auto;
     background: rgb(51, 51, 51);
-    max-width: 800px;
+    max-width: 1200px;
     padding-top: 30px;
     padding-bottom: 8px;
     border-radius: 5px;
 }
-
 
 .pic_placeholder {
     background: rgb(51, 51, 51);
@@ -281,7 +301,7 @@ button {
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 600px;
+    max-width: 600px;
 }
 
 .bio_input_field {
@@ -296,7 +316,7 @@ button {
 }
 
 .show_bio {
-    background: rgb(51, 51, 51);
+    /* background: rgb(51, 51, 51); */
 }
 
 .find_people {
@@ -311,10 +331,6 @@ button {
 }
 
 /* for FindPeople */
-.users {
-    background: rgb(51, 51, 51);
-    width: 800;
-}
 
 #no_results {
 }
@@ -378,16 +394,30 @@ button {
     background: rgb(51, 51, 51);
 }
 
-.user {
+.user_myself {
     margin: auto;
-    background: #4b4b4b;
+    position: relative;
     max-width: 1200px;
-    padding-top: 30px;
-    padding-bottom: 8px;
-    border-radius: 5px;
+  
 }
 
+.user {
+   
+    position: relative;
+    margin: auto;
+    max-width: 1200px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    border-radius: 5px;
+    height: 165px; 
+    margin-top: 8px;
+    background: rgb(51, 51, 51);
+}
 
+.users {
+    background: rgb(51, 51, 51);
+    width: 800;
+}
 .all_users {
     padding-top: 30px;
     text-align: center;
@@ -442,7 +472,8 @@ button {
     justify-content: flex-start;
     text-align: left;
     background: #4b4b4b;
-    padding: 8px;
+    padding-left: 12px;
+
     width: 600px;
     border-radius: 5px;
     flex-direction: row;

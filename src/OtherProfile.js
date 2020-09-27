@@ -40,23 +40,28 @@ export default class OtherProfile extends React.Component {
             return <div>...Loading</div>;
         }
         return (
-            <div className="other_profile">
-                <div>
-                    <ProfilePic
-                        firstname={this.state.firstname}
-                        lastname={this.state.lastname}
-                        profilePic={this.state.profilePic}
-                    />
-                </div>
-                <div className="other_profile_data">
-                    <h2>
-                        {this.state.firstname} {this.state.lastname}
-                    </h2>
+            <div>
+                <h2>OTHER SECRET KEEPERS</h2>
+                <div className="other_profile_top">
+                    <div className="other_profile">
+                        <div>
+                            <ProfilePic
+                                firstname={this.state.firstname}
+                                lastname={this.state.lastname}
+                                profilePic={this.state.profilePic}
+                            />
+                        </div>
+                        <div className="other_profile_data">
+                            <h2>
+                                {this.state.firstname} {this.state.lastname}
+                            </h2>
 
-                    <p className="show_bio">{this.state.bio}</p>
-                </div>
+                            <p className="show_bio">{this.state.bio}</p>
+                        </div>
 
-                <FriendButton otherUserId={this.state.id} />
+                        <FriendButton otherUserId={this.state.id} />
+                    </div>
+                </div>
             </div>
         );
     }

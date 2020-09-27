@@ -34,7 +34,7 @@ export default function FindPeople() {
                 <div className="welcome_image">
                     <img src="./static/secret_2.jpg" alt="" />
                 </div>
-                <input
+                <input className="input_find_user"
                     onChange={(e) => {
                         setQuery(e.target.value);
                     }}

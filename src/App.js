@@ -32,91 +32,102 @@ export default class App extends React.Component {
             return <div>I am Loading...</div>;
         } else {
             return (
-                <div className="user">
-                    <ProfilePic
-                        firstname={user.firstname}
-                        lastname={user.lastname}
-                        profilePic={user.profile_picture_url}
-                        clickHandler={(e) =>
-                            this.setState({ uploaderVisible: true })
-                        }
-                    />
+                <div>
+                    <div className="background-container">
+                        <div className="user_myself"></div>
+                        <div className="user">
+                            <ProfilePic
+                                firstname={user.firstname}
+                                lastname={user.lastname}
+                                profilePic={user.profile_picture_url}
+                                clickHandler={(e) =>
+                                    this.setState({ uploaderVisible: true })
+                                }
+                            />
 
-                    {uploaderVisible && (
-                        <Uploader
-                            closeHandler={(e) =>
-                                this.setState({ uploaderVisible: false })
-                            }
-                            onUploadDone={(newPic) => {
-                                this.setState({
-                                    uploaderVisible: false,
-                                    user: {
-                                        ...user,
-                                        profile_picture_url: newPic,
-                                    },
-                                });
-                            }}
-                        />
-                    )}
-                    <h2>Hi {user.firstname}</h2>
-                    <p>TELL US OUR SECRET!</p>
-
-
-                    <BrowserRouter>
-                        <nav>
-                            <Link to="/">MySelf </Link> --
-                            <Link to="/users"> Find Others </Link> --
-                            <Link to="/friends"> Friends </Link> --
-                            <Link to="/all-users"> All User </Link> --
-                            <Link to="/chat"> Chat </Link>
-                        </nav>
-                        
-                            
-
-                        <Route
-                            exact
-                            path="/"
-                            render={() => (
-                                <ProfileComposition
-                                    firstname={user.firstname}
-                                    lastname={user.lastname}
-                                    profilePic={
-                                        <img src={user.profile_picture_url} />
+                            {uploaderVisible && (
+                                <Uploader
+                                    closeHandler={(e) =>
+                                        this.setState({
+                                            uploaderVisible: false,
+                                        })
                                     }
-                                    bioEditor={
-                                        <BioEditor
-                                            bio={user.bio}
-                                            saveHandler={(newBio) => {
-                                                this.setState({
-                                                    user: {
-                                                        ...user,
-                                                        bio: newBio,
-                                                    },
-                                                });
-                                            }}
+                                    onUploadDone={(newPic) => {
+                                        this.setState({
+                                            uploaderVisible: false,
+                                            user: {
+                                                ...user,
+                                                profile_picture_url: newPic,
+                                            },
+                                        });
+                                    }}
+                                />
+                            )}
+                            <h2>Hi {user.firstname}</h2>
+                            <p>TELL US OUR SECRET!</p>
+
+                            <BrowserRouter>
+                                <nav>
+                                    <Link to="/">MySelf </Link> --
+                                    <Link to="/users"> Find Others </Link> --
+                                    <Link to="/friends"> Friends </Link> --
+                                    <Link to="/all-users"> All User </Link> --
+                                    <Link to="/chat"> Chat </Link>
+                                </nav>
+
+                                <Route
+                                    exact
+                                    path="/"
+                                    render={() => (
+                                        <ProfileComposition
+                                            firstname={user.firstname}
+                                            lastname={user.lastname}
+                                            profilePic={
+                                                <img
+                                                    src={
+                                                        user.profile_picture_url
+                                                    }
+                                                />
+                                            }
+                                            bioEditor={
+                                                <BioEditor
+                                                    bio={user.bio}
+                                                    saveHandler={(newBio) => {
+                                                        this.setState({
+                                                            user: {
+                                                                ...user,
+                                                                bio: newBio,
+                                                            },
+                                                        });
+                                                    }}
+                                                />
+                                            }
                                         />
-                                    }
+                                    )}
                                 />
-                            )}
-                        />
-                        <Route
-                            path="/user/:id"
-                            render={(props) => (
-                                <OtherProfile
-                                    key={props.match.url}
-                                    match={props.match}
-                                    history={props.history}
+                                <Route
+                                    path="/user/:id"
+                                    render={(props) => (
+                                        <OtherProfile
+                                            key={props.match.url}
+                                            match={props.match}
+                                            history={props.history}
+                                        />
+                                    )}
                                 />
-                            )}
-                        />
-                        <Route component={FindPeople} path="/users/" />
+                                <Route component={FindPeople} path="/users/" />
 
-                        <Route component={Friends} path="/friends/" />
+                                <Route component={Friends} path="/friends/" />
 
-                        <Route component={AllUsers} path="/all-users/" />
+                                <Route
+                                    component={AllUsers}
+                                    path="/all-users/"
+                                />
 
-                        <Route component={Chat} path="/chat/" />
-                    </BrowserRouter>
+                                <Route component={Chat} path="/chat/" />
+                            </BrowserRouter>
+                        </div>
+                    </div>
                     
                 </div>
             );
