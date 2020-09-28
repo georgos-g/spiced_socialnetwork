@@ -7,7 +7,7 @@ export default function Profile({
     profilePic,
 }) {
     return (
-        <div className="profile">
+        <div className="profile profile_myself">
             <div className="welcome_image">
                 <img src="./static/secret_2.jpg" alt="" />
             </div>
