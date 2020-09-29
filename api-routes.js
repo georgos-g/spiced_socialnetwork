@@ -12,7 +12,6 @@ const s3 = require("./s3.js");
 const uidSafe = require("uid-safe");
 const path = require("path");
 
-
 router.post("/api/v1/register", (request, response) => {
     const { firstname, lastname, email, password } = request.body;
 

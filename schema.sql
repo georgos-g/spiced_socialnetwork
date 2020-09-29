@@ -47,11 +47,11 @@ CREATE TABLE chat_messages
 INSERT INTO chat_messages 
 (user_id, message_text) 
 VALUES 
-(33, 'Hi secret friend'),
+(32, 'Hi secret friend'),
 (44, 'How are you???'),
 (55, 'booom booom booom'),
 (66, '...can someone tell a joke?'),
-(77, 'The world is flat as my belly (...not!)');
+(77, 'Jesus was a Jazz Dancer :-)');
 
 
 
