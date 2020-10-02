@@ -50,7 +50,7 @@ router.post("/api/v1/login", (request, response) => {
             password,
         });
     }
-    //compare pasword_hash with DB
+    //compare password_hash with DB
     db.getUserByEmail(email)
         .then((result) => {
             const userPasswordHashFromDB = result.password_hash;
@@ -70,7 +70,7 @@ router.post("/api/v1/login", (request, response) => {
 
             response.json({
                 success: false,
-                error: "Your email or passwort are incorrect.",
+                error: "Your email or password are incorrect.",
             });
         });
 });

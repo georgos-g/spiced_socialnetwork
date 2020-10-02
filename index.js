@@ -49,9 +49,9 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-// user not loged in
+// user not logged in
 app.get("/welcome", (request, response) => {
-    //if userID is loged in  -> redirect to Index
+    //if userID is logged in  -> redirect to Index
     if (request.session.userID) {
         response.redirect("/"); //logged in
     } else {

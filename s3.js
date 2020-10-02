@@ -1,4 +1,4 @@
-const secrets = require ('./aws.json');
+const secrets = require ('./secrets.json');
 const aws = require ('aws-sdk');
 const fs = require ('fs');
 //
