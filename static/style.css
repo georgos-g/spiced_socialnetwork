@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,400i,700,700i");
 
-html, body {
+html,
+body {
     height: 100%;
-  }
+}
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -27,11 +28,6 @@ body {
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
     text-align: center;
-    
-   
-    
-  
-    
 }
 
 h1,
@@ -74,9 +70,7 @@ p > a:focus {
     color: none;
     border-bottom: 0px solid #2caadf;
 }
-#content{
-   
-       
+#content {
 }
 .center {
     display: flex;
@@ -256,16 +250,15 @@ nav {
 
 .welcome {
     border-radius: 5px;
- 
+
     margin: auto;
-    background:rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
     max-width: 1200px;
 }
 
 .welcome h1 {
     padding: 0px;
     padding-top: 30px;
-    
 }
 
 .welcome_image img {
@@ -350,13 +343,11 @@ button {
     /* background: rgba(0, 0, 0, 0.5); */
 }
 
-.bio_photo_txt{
-position: absolute;
-color: grey;
-font-size: 10px;
-bottom: 5px;
-
-
+.bio_photo_txt {
+    position: absolute;
+    color: grey;
+    font-size: 10px;
+    bottom: 5px;
 }
 
 .find_people {
@@ -457,7 +448,6 @@ bottom: 5px;
 }
 
 .users {
-   
     padding-bottom: 5x;
     margin-bottom: 10px;
 }
