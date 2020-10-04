@@ -20,7 +20,7 @@ export default class App extends React.Component {
         };
     }
     componentDidMount() {
-        //wenn alles geladen ist ausführen
+        //run when loaded
         axios.get("/api/v1/me").then((response) => {
             this.setState({ user: response.data });
         });
@@ -33,7 +33,7 @@ export default class App extends React.Component {
         } else {
             return (
                 <div>
-                    <div id="particles-js"></div>
+                    {/* <div id="particles-js"></div> */}
 
                     <div className="user_myself"></div>
                     <div className="user">

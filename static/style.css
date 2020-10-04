@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,400i,700,700i");
+html, body {
+    height: 100%;
+  }
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -23,7 +26,10 @@ body {
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
     text-align: center;
-    height: 100%;
+   
+    
+  
+    
 }
 
 h1,
@@ -66,7 +72,10 @@ p > a:focus {
     color: none;
     border-bottom: 0px solid #2caadf;
 }
-
+#content{
+   
+       
+}
 .center {
     display: flex;
     flex-flow: wrap;
@@ -100,9 +109,18 @@ nav {
 .my_self {
     max-width: 1200px;
     min-width: 444px;
-    padding: 20px;
+    padding: 10px;
+    padding-top: 22px;
+    padding-bottom: 20px;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.5);
+}
+.my_self img {
+    width: 800px;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-bottom: 20px;
 }
 
 .profile {
@@ -148,7 +166,7 @@ nav {
 .other_profile_top {
     height: 230px;
     background: rgba(0, 0, 0, 0.5);
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
 }
 .other_profile {
@@ -235,9 +253,17 @@ nav {
 }
 
 .welcome {
+    border-radius: 5px;
+ 
     margin: auto;
-    background: rgba(71, 71, 71, 0.6);
+    background:rgba(0, 0, 0, 0.5);
     max-width: 1200px;
+}
+
+.welcome h1 {
+    padding: 0px;
+    padding-top: 30px;
+    
 }
 
 .welcome_image img {
@@ -252,7 +278,7 @@ nav {
     margin: auto;
     /* background: rgba(0, 0, 0, 0.5); */
     max-width: 1200px;
-    padding-top: 30px;
+    padding-top: 16px;
     padding-bottom: 8px;
     border-radius: 5px;
 }
@@ -266,7 +292,7 @@ nav {
     border-radius: 5px;
     width: 500px;
     height: 90px;
-    background: rgb(20, 20, 20, 0.8);
+    background: rgb(20, 20, 20, 0.95);
     top: 10%;
     left: 50%;
     transform: translate(-50%, 50%);
@@ -274,8 +300,11 @@ nav {
 }
 
 .uploader_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
-    margin: 5px;
+    margin: 10px;
     top: 10px;
     left: 50%;
     transform: translate(-50%);
@@ -334,13 +363,9 @@ button {
 
 #no_results {
     padding-top: 3px;
-    
-
 }
-.input_find_user{
+.input_find_user {
     padding-top: 3px;
-    
-    
 }
 
 .friends {
@@ -412,7 +437,7 @@ button {
     max-width: 1200px;
     min-width: 600px;
     padding-top: 10px;
-    padding-bottom: 16px;
+    padding-bottom: 10px;
     border-radius: 5px;
     height: 165px;
     margin-top: 8px;
@@ -420,12 +445,9 @@ button {
 }
 
 .users {
-    /* background: rgba(0, 0, 0, 0.5); */
+   
     padding-bottom: 5x;
     margin-bottom: 10px;
-
-   
-   
 }
 .all_users {
     padding-top: 30px;

@@ -28,9 +28,11 @@ export default class Uploader extends React.Component {
 
         return (
             <div id="uploader">
-                <div className="close_button" onClick={closeHandler}>x</div>
+                <div className="close_button" onClick={closeHandler}>
+                    x
+                </div>
                 <div className="uploader_content pointer">
-                    <input
+                    <input className='center'
                         type="file"
                         name="file"
                         onChange={(e) =>
@@ -39,6 +41,7 @@ export default class Uploader extends React.Component {
                             })
                         }
                     />
+
                     <button onClick={(e) => this.upload()}>UPLOAD</button>
                 </div>
             </div>
