@@ -46,6 +46,7 @@ export default class BioEditor extends React.Component {
                     <a onClick={(e) => this.setState({ isEditing: true })}>
                         {bio ? "Edit your Bio" : "add bio"}
                     </a>
+                    <p className='bio_photo_txt'>Click on the round pic to change your photo</p>
                 </div>
             );
         }

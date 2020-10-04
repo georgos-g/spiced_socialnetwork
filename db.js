@@ -1,9 +1,14 @@
 const spicedPG = require("spiced-pg");
 
-let dbUrl =
-    process.env.DATABASE_URL ||
-    "postgres:georgos:georgos@localhost:5432/socialnetwork";
-const db = spicedPG(dbUrl);
+// let dbUrl =
+//     process.env.DATABASE_URL ||
+//     "postgres:georgos:georgos@localhost:5432/socialnetwork";
+// const db = spicedPG(dbUrl);
+
+const db = spicedPG(process.env.DATABASE_URL || 'postgres:georgos:georgos@localhost:5432/socialnetwork')
+
+
+
 
 exports.addNewUser = (firstname, lastname, email, password_hash) => {
     return db
@@ -127,8 +132,8 @@ exports.addFriendRequest = (from_id, to_id) => {
     return db
         .query(
             `INSERT INTO friend_requests 
-            (from_id, to_id) 
-            VALUES($1, $2) RETURNING *;`,
+            (from_id, to_id, accepted) 
+            VALUES($1, $2, false) RETURNING *;`,
             [from_id, to_id]
         )
         .then((response) => response.rows[0]);
@@ -139,7 +144,7 @@ exports.acceptFriendRequest = (from_id, to_id) => {
     return db
         .query(
             `UPDATE friend_requests 
-            SET accepted=TRUE 
+            SET accepted=true 
             WHERE 
             (from_id=$1 AND to_id=$2)
             OR
@@ -153,9 +158,8 @@ exports.acceptFriendRequest = (from_id, to_id) => {
 exports.deleteFriendRequest = (from_id, to_id) => {
     return db
         .query(
-            `UPDATE friend_requests 
-            SET accepted=FALSE 
-            WHERE 
+            `DELETE from friend_requests 
+             WHERE 
             (from_id=$1 AND to_id=$2)
             OR
             (from_id=$2 AND to_id=$1);`,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios.js";
 import { cancelRequest, unFriend, acceptRequest } from "./actions.js";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const NO_REQUEST = "no-request";
 const REQUEST_MADE_BY_YOU = "request-made-by-you";
@@ -23,6 +23,15 @@ export default function FriendButton(props) {
         const myUrl = `/api/v1/friend-request/${action}/${props.otherUserId}`;
         const response = await axios.post(myUrl);
         setStatus(response.data.status);
+
+        // const dispatch = useDispatch();
+        // if (action == "unfriend") {
+        //     dispatch(unFriend(props.id));
+        // } else if (action == "accept") {
+        //     dispatch(acceptRequest(props.id));
+        // } else if (action == "cancel") {
+        //     dispatch(cancelRequest(props.id));
+        // }
     };
 
     useEffect(() => {
@@ -31,9 +40,7 @@ export default function FriendButton(props) {
 
     if (status == NO_REQUEST) {
         return (
-            <button onClick={(e) => makeAjaxCall("make")}>
-                MAKE REQUEST
-            </button>
+            <button onClick={(e) => makeAjaxCall("make")}>MAKE REQUEST</button>
         );
     } else if (status == REQUEST_MADE_BY_YOU) {
         return (
@@ -49,29 +56,22 @@ export default function FriendButton(props) {
         );
     } else if (status == REQUEST_ACCEPTED) {
         return (
-            <button onClick={(e) => makeAjaxCall("unfriend")}>
-                UNFRIEND
-            </button>
+            <button onClick={(e) => makeAjaxCall("unfriend")}>UNFRIEND</button>
         );
     } else {
-        return <div> Ooops something went wrong!!!</div>;
+        return <div> ...ooops something went wrong!!!</div>;
     }
 
-    
+    // function button(action) {
+    //     const dispatch = useDispatch();
+    //     if (action == "unfriend") {
+    //         dispatch(unFriend(props.id));
+    //     } else if (action == "accept") {
+    //         dispatch(acceptRequest(props.id));
+    //     } else if (action == "cancel") {
+    //         dispatch(cancelRequest(props.id));
+    //     }
+    // }
 
-    function button(action) {
-        const dispatch = useDispatch();
-        if (action == "unfriend") {
-            dispatch(unFriend(props.id));
-        } else if (action == "accept") {
-            dispatch(acceptRequest(props.id));
-        } else if (action == "cancel") {
-            dispatch(cancelRequest(props.id));
-        }
-    }
-
-
-    button(); 
-    
-
+    // button();
 }

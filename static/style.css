@@ -26,6 +26,7 @@ body {
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
     text-align: center;
+    
    
     
   
@@ -348,6 +349,15 @@ button {
     /* background: rgba(0, 0, 0, 0.5); */
 }
 
+.bio_photo_txt{
+position: absolute;
+color: grey;
+font-size: 10px;
+bottom: 5px;
+
+
+}
+
 .find_people {
     margin: auto;
     max-width: 1200px;
@@ -535,6 +545,8 @@ button {
 }
 
 .chat_input_field {
+    padding: 5px;
+    padding-left: 10px;
     width: 600px;
     margin-top: 20px;
 

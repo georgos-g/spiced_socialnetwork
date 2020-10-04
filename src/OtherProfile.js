@@ -8,7 +8,7 @@ export default class OtherProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            itsSelf: false,
+            itSelf: false,
         };
     }
 
@@ -18,7 +18,7 @@ export default class OtherProfile extends React.Component {
         axios
             .get("/api/v1/user/" + userId)
             .then(({ data }) => {
-                if (data.itsSelf) {
+                if (data.itSelf) {
                     this.props.history.push("/");
                 } else {
                     this.setState({
