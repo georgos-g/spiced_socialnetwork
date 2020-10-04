@@ -1,14 +1,9 @@
 const spicedPG = require("spiced-pg");
 
-// let dbUrl =
-//     process.env.DATABASE_URL ||
-//     "postgres:georgos:georgos@localhost:5432/socialnetwork";
-// const db = spicedPG(dbUrl);
-
-const db = spicedPG(process.env.DATABASE_URL || 'postgres:georgos:georgos@localhost:5432/socialnetwork')
-
-
-
+let dbUrl =
+    process.env.DATABASE_URL ||
+    "postgres:georgos:georgos@localhost:5432/socialnetwork";
+const db = spicedPG(dbUrl);
 
 exports.addNewUser = (firstname, lastname, email, password_hash) => {
     return db

@@ -5,15 +5,18 @@ const fs = require ('fs');
 
 
 const s3 = new aws.S3({
-    accessKeyId: secrets.AWS_KEY,
-    secretAccessKey: secrets.AWS_SECRET
+    //accessKeyId: secrets.AWS_KEY,
+    //secretAccessKey: secrets.AWS_SECRET
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_SECRET
 });
 
 exports.uploadFile = (fileFromRequest) => {
     const {filename, mimetype, size, path} = fileFromRequest;
 
     return s3.putObject({
-        Bucket: secrets.AWS_BUCKET_NAME,
+        //Bucket: secrets.AWS_BUCKET_NAME,
+        Bucket: process.env.AWS_BUCKET_NAME,
         ACL: 'public-read',
         Key: filename,
         Body: fs.createReadStream(path),
@@ -26,6 +29,7 @@ exports.uploadFile = (fileFromRequest) => {
 }; 
 
 exports.generateBucketURL = filename => {
-    return `https://${secrets.AWS_BUCKET_NAME}.s3.amazonaws.com/${filename}`;
+    //return `https://${secrets.AWS_BUCKET_NAME}.s3.amazonaws.com/${filename}`;
+    return `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${filename}`;
    
 };
