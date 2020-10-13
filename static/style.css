@@ -654,4 +654,9 @@ button {
     .other_profile_data .bio_input_field {
         max-width: 140px;
     }
+
+    .other_profile_top {
+       padding: 10px 4px 0 4px;
+        border-radius: 5px;
+    }
 }
