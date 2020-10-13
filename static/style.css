@@ -104,7 +104,7 @@ nav {
 
 .my_self {
     max-width: 1200px;
-    min-width: 360px;
+    /* min-width: 360px; */
     padding: 10px;
     padding-top: 22px;
     padding-bottom: 20px;
@@ -635,7 +635,7 @@ button {
         max-width: 200px;
     }
     .bio_editor {
-        max-width: 250px;
+        max-width: 210px;
     }
     .bio_input_field {
         width: 200px;
@@ -648,15 +648,19 @@ button {
    }
 }
     
-}
+
 
 @media only screen and (max-width: 400px) {
-    .other_profile_data .bio_input_field {
+    .other_profile_data  {
         max-width: 140px;
     }
 
     .other_profile_top {
        padding: 10px 4px 0 4px;
         border-radius: 5px;
+    }
+
+    .bio_editor {
+        width: 160px;
     }
 }
